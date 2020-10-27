@@ -15,7 +15,7 @@ num_2 = int(input())
 sign = input()
 
 if sign != '+' and sign != '-' and sign != '*' and sign != '/':
-    print('Неверная операция')
+    print('Invalid operation')
 elif sign == '+':
     print(num_1 + num_2)
 elif sign == '-':
@@ -24,6 +24,6 @@ elif sign == '*':
     print(num_1 * num_2)
 elif sign == '/':
     if num_2 == 0:
-        print('На ноль делить нельзя!')
+        print('You cannot divide by zero!')
     else:
         print(num_1 / num_2)
