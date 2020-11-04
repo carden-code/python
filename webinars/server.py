@@ -1,5 +1,6 @@
 import time
 from datetime import datetime
+from json import dumps
 
 from flask import Flask, request, abort
 
@@ -30,7 +31,23 @@ def hello():
 
 @app.route("/status")
 def status():
+    # колличество сообщений
+    all_mes = 0
+
+    for mes in db:
+        all_mes += 1
+        if mes == db[-1]:
+            break
+
+    # Подсчёт уникальный имён на сервере
+    name = []
+    for i in db:
+        name.append(i['name'])
+    uniq_name = set(name)
+
     return {
+        'all_message': all_mes,
+        'all_users': len(uniq_name),
         'status': True,
         'name': 'Messenger',
         'time1': time.time(),
