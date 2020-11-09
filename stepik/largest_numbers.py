@@ -8,15 +8,11 @@
 # The program should print the two largest numbers, each on a separate line.
 n = int(input())
 array = []
-maxim = 0
-maxim_2 = 0
 
 for i in range(n):
     num = int(input())
     array.append(num)
 
-maxim = max(array)
-array.remove(maxim)
-maxim_2 = max(array)
-print(maxim)
-print(maxim_2)
+array.sort()
+print(array[-1])
+print(array[-2])
