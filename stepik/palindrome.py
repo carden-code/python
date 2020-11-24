@@ -6,6 +6,9 @@
 #
 # Output data format
 # The program should print "YES" if the word is a palindrome and "NO" otherwise.
+# first -
+# string = input()
+# print('YES' if string == string[::-1] else 'NO')
 string = input()
 if string[::-1] == string:
     print('YES')
