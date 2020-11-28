@@ -8,4 +8,5 @@
 # Output data format
 # The program should display the text in accordance with the condition of the problem.
 string = input()
-print(string[:string.find('h')] + string[string.rfind('h') + 1:])
+elem = 'h'
+print(string[:string.find(elem)] + string[string.rfind(elem) + 1:])
