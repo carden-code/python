@@ -8,6 +8,6 @@
 # The program should display a list consisting of the specified strings.
 num = int(input())
 array = []
-for i in range(num):
+for _ in range(num):
     array.append(input())
 print(array)
