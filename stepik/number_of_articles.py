@@ -16,4 +16,4 @@ for c in list_string:
     if c == 'a' or c == 'an' or c == 'the':
         count += 1
 
-print(f'Общее количество артиклей: {count}')
+print(f'Total number of articles: {count}')
