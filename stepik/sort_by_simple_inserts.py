@@ -1,4 +1,4 @@
-# You want to sort the list of numbers in ascending order: [1, 7, -3, 9, 0, -67, 34, 12, 45, 1000, 6,  8, -2, 99]
+# You want to sort the list of numbers in ascending order: [1, 7, -3, 9, 0, -67, 34, 12, 45, 1000, 6,  8, -2, 99].
 a = [1, 7, -3, 9, 0, -67, 34, 12, 45, 1000, 6,  8, -2, 99]
 n = len(a)
 
