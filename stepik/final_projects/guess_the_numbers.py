@@ -12,7 +12,6 @@ name = input('Пожалуйста введите ваше имя: ')
 num = randint(1, 100)
 while True:
     user_num = int(input(f'{name} введите число от 1 до 100: '))
-    print(num)
     if user_num > num:
         print('Слишком много, попробуйте еще раз')
     elif user_num < num:
