@@ -24,11 +24,11 @@ step = ''
 lang = ''
 
 while True:
-    direction = input("Если вы хотите зашифровать текст введите '+' если расшифровать '-': ")
+    direction = input("Если вы хотите зашифровать текст введите '+', если расшифровать '-': ")
     if direction not in ['+', '-']:
         print('Может быть введём + или - ?')
         continue
-    language = input("На каком языке ваш текст? Если Русский введите - 'ru' если Английский - 'en': ")
+    language = input("На каком языке ваш текст? Если Русский введите - 'ru', если Английский - 'en': ")
     if language not in ['ru', 'en']:
         print('Может быть введём ru или - en ?')
         continue
@@ -53,26 +53,26 @@ for c in text_list:
         if c == c.upper():
             if direction == '+':
                 if index_encrypt >= len(lang):
-                    index = index_encrypt - (len(lang))
+                    index = index_encrypt - len(lang)
                     text_new += lang[index].upper()
                 else:
                     text_new += lang[index_encrypt].upper()
             elif direction == '-':
                 if index_decipher < 0:
-                    index = index_decipher + (len(lang) - 1)
+                    index = index_decipher + len(lang)
                     text_new += lang[index].upper()
                 else:
                     text_new += lang[index_decipher].upper()
         elif c == c.lower():
             if direction == '+':
                 if index_encrypt >= len(lang):
-                    index = index_encrypt - (len(lang))
+                    index = index_encrypt - len(lang)
                     text_new += lang[index]
                 else:
                     text_new += lang[index_encrypt]
             elif direction == '-':
                 if index_decipher < 0:
-                    index = index_decipher + (len(lang) - 1)
+                    index = index_decipher + len(lang)
                     text_new += lang[index]
                 else:
                     text_new += lang[index_decipher]
