@@ -22,6 +22,65 @@ def finish(list_h):
         return False
 
 
+def hangman(error):
+    if error == 6:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|")
+        print("\t|")
+        print("\t|")
+        print("\t|")
+        print("\t|__________")
+    if error == 5:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|")
+        print("\t|")
+        print("\t|")
+        print("\t|__________")
+    if error == 4:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|         |")
+        print("\t|")
+        print("\t|")
+        print("\t|__________")
+    if error == 3:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|        /|")
+        print("\t|")
+        print("\t|")
+        print("\t|__________")
+    if error == 2:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|        /|\\")
+        print("\t|")
+        print("\t|")
+        print("\t|__________")
+    if error == 1:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|        /|\\")
+        print("\t|        / ")
+        print("\t|")
+        print("\t|__________")
+    if error == 0:
+        print("\t___________")
+        print("\t|/        |")
+        print("\t|         O")
+        print("\t|        /|\\")
+        print("\t|        / \\")
+        print("\t|")
+        print("\t|__________")
+
+
 while True:
     hidden_word = input('Загадайте слово.: ').strip()
     if is_valid(hidden_word):
@@ -34,23 +93,22 @@ list_word = [c for c in hidden_word]
 list_hidden = ['_' for c in range(len(hidden_word))]
 letter = ''
 attempts = 6
-print(list_word)
-print(*list_hidden)
-print(hidden_word)
-print(attempts)
 
 
 while True:
     if finish(list_hidden):
-        letter = input().strip()
+        letter = input('Угадайте слово. Введите 1 букву: ').strip()
         if is_valid(letter):
             if letter in list_word:
                 print(f'Вы угадали, буква: "{letter}" присутствует в слове.')
-                print(find_letter(letter, list_word, list_hidden))
+                find_letter(letter, list_word, list_hidden)
+                print(list_hidden)
+                hangman(attempts)
             else:
                 attempts -= 1
                 print(f'Буква "{letter}" отсутствует в слове.')
-                print(f'Часть висилицы, осталось частей: {attempts} ')
+                print(list_hidden)
+                hangman(attempts)
                 if attempts == 0:
                     print('Вы проиграли!')
         else:
