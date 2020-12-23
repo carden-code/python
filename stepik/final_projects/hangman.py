@@ -65,7 +65,7 @@ attempts = 6
 while True:
     if finish(list_hidden):
         letter = input('Угадайте слово. Введите 1 букву: ').strip()
-        if is_valid(letter):
+        if is_valid(letter) and len(letter) == 1:
             if letter in list_word:
                 print(f'Вы угадали, буква: "{letter}" присутствует в слове.')
                 find_letter(letter, list_word, list_hidden)
@@ -82,7 +82,7 @@ while True:
                     print('Вы проиграли!')
                     break
         else:
-            print('Можно использовать только буквы, попробуйте ещё раз.')
+            print('Не известная буква! Попробуйте ещё раз.')
             continue
     else:
         print('Поздравляю вы отгадали слово!')
