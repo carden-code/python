@@ -58,6 +58,7 @@ while True:
 list_word = [c for c in hidden_word]
 list_hidden = ['_' for c in range(len(hidden_word))]
 hangman_list = ["\t___________", "\t|/        |", "\t|", "\t|", "\t|", "\t|", "\t|__________"]
+named_letters = []
 letter = ''
 attempts = 6
 
@@ -65,6 +66,7 @@ attempts = 6
 while True:
     if finish(list_hidden):
         letter = input('Угадайте слово. Введите 1 букву: ').strip()
+        named_letters.append(letter)
         if is_valid(letter) and len(letter) == 1:
             if letter in list_word:
                 print(f'Вы угадали, буква: "{letter}" присутствует в слове.')
