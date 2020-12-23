@@ -1,3 +1,12 @@
+# Описание проекта:
+#     Программа загадывает слово, а пользователь должен его угадать.
+#     Изначально все буквы слова неизвестны.
+#     Также рисуется виселица с петлей. Пользователь предлагает букву, которая может входить в это слово.
+#     Если такая буква есть в слове, то программа ставит букву столько раз, сколько она встречается в слове.
+#     Если такой буквы нет, к виселице добавляется круг в петле, изображающий голову.
+#     Пользователь продолжает отгадывать буквы до тех пор, пока не отгадает всё слово.
+#     За каждую неудачную попытку добавляется еще одна часть туловища висельника
+#     (обычно их 6: голова, туловище, 2 руки и 2 ноги.
 def is_valid(word):
     flag = True
     for c in word:
@@ -8,9 +17,9 @@ def is_valid(word):
     return flag
 
 
-def find_letter(let, arr, hid_arr):
-    for c in range(len(arr)):
-        if arr[c] == let:
+def find_letter(let, array, hid_arr):
+    for c in range(len(array)):
+        if array[c] == let:
             hid_arr[c] = let
     return hid_arr
 
@@ -22,63 +31,20 @@ def finish(list_h):
         return False
 
 
-def hangman(error):
-    if error == 6:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|")
-        print("\t|")
-        print("\t|")
-        print("\t|")
-        print("\t|__________")
-    if error == 5:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|")
-        print("\t|")
-        print("\t|")
-        print("\t|__________")
-    if error == 4:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|         |")
-        print("\t|")
-        print("\t|")
-        print("\t|__________")
-    if error == 3:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|        /|")
-        print("\t|")
-        print("\t|")
-        print("\t|__________")
-    if error == 2:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|        /|\\")
-        print("\t|")
-        print("\t|")
-        print("\t|__________")
-    if error == 1:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|        /|\\")
-        print("\t|        / ")
-        print("\t|")
-        print("\t|__________")
-    if error == 0:
-        print("\t___________")
-        print("\t|/        |")
-        print("\t|         O")
-        print("\t|        /|\\")
-        print("\t|        / \\")
-        print("\t|")
-        print("\t|__________")
+def hangman(error, array):
+    for c in range(len(array)):
+        if error < 6:
+            array[2] = "\t|         O"
+        if error < 5:
+            array[3] = "\t|         |"
+        if error < 4:
+            array[3] = "\t|        /|"
+        if error < 3:
+            array[3] = "\t|        /|\\"
+        if error < 2:
+            array[4] = "\t|        / "
+        if error < 1:
+            array[4] = "\t|        / \\"
 
 
 while True:
@@ -91,6 +57,7 @@ while True:
 
 list_word = [c for c in hidden_word]
 list_hidden = ['_' for c in range(len(hidden_word))]
+hangman_list = ["\t___________", "\t|/        |", "\t|", "\t|", "\t|", "\t|", "\t|__________"]
 letter = ''
 attempts = 6
 
@@ -103,14 +70,17 @@ while True:
                 print(f'Вы угадали, буква: "{letter}" присутствует в слове.')
                 find_letter(letter, list_word, list_hidden)
                 print(list_hidden)
-                hangman(attempts)
+                hangman(attempts, hangman_list)
+                print(*[c for c in hangman_list], sep='\n')
             else:
                 attempts -= 1
                 print(f'Буква "{letter}" отсутствует в слове.')
                 print(list_hidden)
-                hangman(attempts)
+                hangman(attempts, hangman_list)
+                print(*[c for c in hangman_list], sep='\n')
                 if attempts == 0:
                     print('Вы проиграли!')
+                    break
         else:
             print('Можно использовать только буквы, попробуйте ещё раз.')
             continue
