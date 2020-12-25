@@ -7,6 +7,13 @@
 #     Пользователь продолжает отгадывать буквы до тех пор, пока не отгадает всё слово.
 #     За каждую неудачную попытку добавляется еще одна часть туловища висельника
 #     (обычно их 6: голова, туловище, 2 руки и 2 ноги.
+from random import choice
+
+
+def get_word(list_w):
+    return choice(list_w).upper()
+
+
 def is_valid(word):
     flag = True
     for c in word:
@@ -25,13 +32,11 @@ def find_letter(let, array, hid_arr):
 
 
 def finish(list_h):
-    if '_' in list_h:
-        return True
-    else:
-        return False
+    return True if '_' in list_h else False
 
 
-def hangman(error, array):
+def hangman(error):
+    array = ["\t___________", "\t|/        |", "\t|", "\t|", "\t|", "\t|", "\t|__________"]
     for c in range(len(array)):
         if error < 6:
             array[2] = "\t|         O"
@@ -45,50 +50,77 @@ def hangman(error, array):
             array[4] = "\t|        / "
         if error < 1:
             array[4] = "\t|        / \\"
+    return array
 
 
-while True:
-    hidden_word = input('Загадайте слово.: ').strip()
-    if is_valid(hidden_word):
-        break
-    else:
-        print('Загаданное слово может содержать только буквы, попробуйте ещё раз.')
-        continue
+def play(tries):
+    print('Давайте играть в угадайку слов!')
+    print('_' * len(hidden_word))
+    print(*[c for c in hangman(tries)], sep='\n')
 
-list_word = [c for c in hidden_word]
-list_hidden = ['_' for c in range(len(hidden_word))]
-hangman_list = ["\t___________", "\t|/        |", "\t|", "\t|", "\t|", "\t|", "\t|__________"]
+    while True:
+        if finish(list_hidden):
+            print(f'Количеством допустимых промахов: {tries}')
+            answer = input('Угадайте слово. Введите 1 букву или слово целиком: ').strip().upper()
+            if answer in guessed_letters:
+                print(f'Вы уже вводили букву - "{answer}", поробуйте снова.')
+                continue
+
+            if len(answer) > 1 and len(answer) != len(hidden_word):
+                print(f'В загаданном слове - "{len(hidden_word)}" букв. Попробуйте снова.')
+                continue
+
+            if len(answer) == 1:
+                guessed_letters.append(answer)
+
+            if is_valid(answer) and len(answer) == 1:
+                if answer in list_word:
+                    print(f'Вы угадали, буква: "{answer}" присутствует в слове.')
+                    print(*find_letter(answer, list_word, list_hidden))
+                    print(*[c for c in hangman(tries)], sep='\n')
+                else:
+                    tries -= 1
+                    print(f'Буква "{answer}" отсутствует в слове.')
+                    print(*list_hidden)
+                    print(*[c for c in hangman(tries)], sep='\n')
+                    if tries == 0:
+                        print(f'Вы проиграли! Загаданное слово - "{hidden_word}"')
+                        break
+            elif is_valid(answer) and len(answer) > 1:
+                if answer == hidden_word:
+                    print(f'Вы угадали слово: "{answer}". Поздравляем!')
+                    print(hidden_word)
+                    print(*[c for c in hangman(tries)], sep='\n')
+                    break
+                else:
+                    tries = 0
+                    print(f'"{answer}" - не правильно! Загаданное слово - "{hidden_word}"')
+                    print(*list_hidden)
+                    print(*[c for c in hangman(tries)], sep='\n')
+                    break
+            else:
+                print('Пожалуйста используйте только буквы! Попробуйте ещё раз.')
+                continue
+        else:
+            print(f'Поздравляю вы отгадали слово! {hidden_word}')
+            break
+
+
 word_list = ["человек", "слово", "лицо", "дверь", "земля", "работа", "ребенок", "история", "женщина", "развитие",
              "власть", "правительство", "начальник", "спектакль", "автомобиль", "экономика", "литература", "граница",
              "магазин", "председатель", "сотрудник", "республика", "личность"]
-named_letters = []
-letter = ''
-attempts = 6
-
-
 while True:
-    if finish(list_hidden):
-        letter = input('Угадайте слово. Введите 1 букву: ').strip()
-        named_letters.append(letter)
-        if is_valid(letter) and len(letter) == 1:
-            if letter in list_word:
-                print(f'Вы угадали, буква: "{letter}" присутствует в слове.')
-                find_letter(letter, list_word, list_hidden)
-                print(list_hidden)
-                hangman(attempts, hangman_list)
-                print(*[c for c in hangman_list], sep='\n')
-            else:
-                attempts -= 1
-                print(f'Буква "{letter}" отсутствует в слове.')
-                print(list_hidden)
-                hangman(attempts, hangman_list)
-                print(*[c for c in hangman_list], sep='\n')
-                if attempts == 0:
-                    print('Вы проиграли!')
-                    break
-        else:
-            print('Не известная буква! Попробуйте ещё раз.')
-            continue
+    hidden_word = get_word(word_list)
+    list_word = [c for c in hidden_word]
+    list_hidden = ['_' for c in range(len(hidden_word))]
+    guessed_letters = []
+    attempts = 6
+
+    play(attempts)
+
+    game = input('Желате сиграть ещё? Введите "Д" - Да или "Н" - Нет: ').lower()
+    if game in ['да', 'д', 'da', 'd']:
+        continue
     else:
-        print('Поздравляю вы отгадали слово!')
+        print("До свидания!")
         break
