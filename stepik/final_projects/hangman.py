@@ -118,7 +118,7 @@ while True:
 
     play(attempts)
 
-    game = input('Желате сиграть ещё? Введите "Д" - Да или "Н" - Нет: ').lower()
+    game = input('Желаете сыграть ещё? Введите "Д" - Да или "Н" - Нет: ').lower()
     if game in ['да', 'д', 'da', 'd']:
         continue
     else:
