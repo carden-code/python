@@ -21,6 +21,7 @@ class Stack:
     def pop(self):
         if self.is_empty():
             print("Empty Stack")
+            return None
         else:
             return self.values.pop()
 
