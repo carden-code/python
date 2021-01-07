@@ -2,6 +2,7 @@ class Square:
     def __init__(self, s):
         self.__side = s
         self.__area = None
+        self.__perimeter = None
 
     @property
     def side(self):
@@ -11,6 +12,7 @@ class Square:
     def side(self, value):
         self.__side = value
         self.__area = None
+        self.__perimeter = None
 
     @property
     def area(self):
@@ -18,3 +20,10 @@ class Square:
             print('calculate area')
             self.__area = self.__side**2
         return self.__area
+
+    @property
+    def perimeter(self):
+        if self.__perimeter is None:
+            print('calculate perimeter')
+            self.__perimeter = self.__side * 4
+        return self.__perimeter
