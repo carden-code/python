@@ -1,3 +1,4 @@
+# Вычисляемые свойства
 class Square:
     def __init__(self, s):
         self.__side = s
