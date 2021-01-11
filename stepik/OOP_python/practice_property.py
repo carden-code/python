@@ -6,6 +6,15 @@ class User:
     def __init__(self, login, password):
         self.login = login
         self.password = password
+        self.__secret = 'abracadabra'
+
+    @property
+    def secret(self):
+        pw = input('Введите пароль: ')
+        if self.password == pw:
+            return self.__secret
+        else:
+            raise ValueError('Нет доступа!')
 
     @property
     def password(self):
