@@ -7,18 +7,16 @@
 class Station:
     def __init__(self, name):
         self.name = name
-        self.list_train = []
+        self.trains = []
 
-    def train_arrival(self, train):
-        self.list_train.append(train)
+    def arrive(self, train):
+        self.trains.append(train)
 
     def list_train(self):
-        return self.list_train
+        return self.trains
 
     def type_train(self, type):
         pass
 
     def send_train(self, train):
-        for t in self.list_train:
-            if t == train:
-                self.list_train.remove(train)
+        self.trains.remove(train)
