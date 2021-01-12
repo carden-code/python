@@ -6,17 +6,22 @@
 # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
 class Station:
     def __init__(self, name):
-        self.name = name
-        self.trains = []
+        self.__name = name
+        self.__trains = []
 
     def arrive(self, train):
         self.trains.append(train)
 
-    def list_train(self):
-        return self.trains
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def trains(self):
+        return self.__trains
 
     def type_train(self, type):
         pass
 
     def send_train(self, train):
-        self.trains.remove(train)
+        self.__trains.remove(train)
