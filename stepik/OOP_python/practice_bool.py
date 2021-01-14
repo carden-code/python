@@ -17,4 +17,4 @@ class City:
         return self.name
 
     def __bool__(self):
-        return False if self.name[-1] in ['a', 'e', 'i', 'o', 'u'] else True
+        return self.name[-1] not in ['a', 'e', 'i', 'o', 'u']
