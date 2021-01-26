@@ -48,12 +48,18 @@ class Station:
         self.__trains.remove(train)
 
 
+class Route:
+    pass
+
+
 class Train:
     def __init__(self, number, train_type, wagons):
         self.number = number
         self.train_type = train_type
         self.__wagons = wagons
         self.__current_speed = 0
+        self.__route = None
+        self.__current_station = None
 
     @property
     def current_speed(self):
@@ -69,5 +75,23 @@ class Train:
     def stop(self):
         self.__current_speed = 0
 
+    def attach_wagon(self):
+        if self.__current_speed == 0:
+            self.__wagons += 1
+
+    def detach_wagon(self):
+        if self.__current_speed == 0:
+            self.__wagons -= 1
+
+    def assign_route(self, route):
+        if isinstance(route, Route):
+            self.__route = route
+            self.__current_station = self.__route[0]
+
+    def forward_movement(self):
+        self.__current_station = self.__route[self.__route.index(self.__current_station) + 1]
+
+    def moving_backward(self):
+        self.__current_station = self.__route[self.__route.index(self.__current_station) - 1]
 
 
