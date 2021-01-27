@@ -49,7 +49,20 @@ class Station:
 
 
 class Route:
-    pass
+    def __init__(self, first_station, finish_station):
+        self.__stations = [first_station, finish_station]
+
+    @property
+    def stations(self):
+        return self.__stations
+
+    def add_station(self, station):
+        if isinstance(station, Station):
+            self.__stations.insert(-2, station)
+
+    def del_station(self, station):
+        if isinstance(station, Station) and len(self.__stations) > 2:
+            self.__stations.remove(station)
 
 
 class Train:
@@ -80,7 +93,7 @@ class Train:
             self.__wagons += 1
 
     def detach_wagon(self):
-        if self.__current_speed == 0:
+        if self.__current_speed and self.__wagons:
             self.__wagons -= 1
 
     def assign_route(self, route):
@@ -93,5 +106,3 @@ class Train:
 
     def moving_backward(self):
         self.__current_station = self.__route[self.__route.index(self.__current_station) - 1]
-
-
