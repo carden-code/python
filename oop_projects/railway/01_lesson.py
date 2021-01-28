@@ -90,6 +90,10 @@ class Train:
     def wagons(self):
         return self.__wagons
 
+    @property
+    def route(self):
+        return self.__route
+
     def speed_up(self):
         self.__current_speed += 1
 
@@ -115,3 +119,10 @@ class Train:
     def moving_backward(self):
         self.__current_station = self.__route.stations[self.__route.stations.index(self.__current_station) - 1]
 
+    def next_station(self):
+        if self.__route.stations.index(self.__current_station) + 1 != self.__route.stations[-1]:
+            return self.__route.stations[self.__route.stations.index(self.__current_station) + 1]
+
+    def previous_station(self):
+        if self.__current_station != self.__route.stations[0]:
+            return self.__route.stations[self.__route.stations.index(self.__current_station) - 1]
