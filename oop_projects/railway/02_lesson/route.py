@@ -1,3 +1,4 @@
+
 class Route:
     def __init__(self, first_station, finish_station):
         self.__stations = [first_station, finish_station]
