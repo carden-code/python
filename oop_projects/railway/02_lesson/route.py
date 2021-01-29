@@ -1,3 +1,5 @@
+from station import Station
+
 
 class Route:
     def __init__(self, first_station, finish_station):
