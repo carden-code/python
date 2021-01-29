@@ -5,6 +5,9 @@ class Route:
     def __init__(self, first_station, finish_station):
         self.__stations = [first_station, finish_station]
 
+    def __repr__(self):
+        return f'Маршрут - {self.stations}'
+
     @property
     def stations(self):
         return self.__stations

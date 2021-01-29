@@ -12,7 +12,7 @@ class Train:
         self.__current_station = None
 
     def __repr__(self):
-        return f'Поезд номер - {self.__number}, Тип - {self.__train_type}'
+        return f'Поезд номер - {self.number}, Тип - {self.train_type}'
 
     @property
     def current_station(self):
@@ -47,7 +47,7 @@ class Train:
     def attach_wagon(self, wagon):
         if self.__current_speed == 0:
             if isinstance(wagon, Wagon):
-                if wagon.wagon_type == self.__train_type:
+                if wagon.wagon_type == self.train_type:
                     self.__wagons.append(wagon)
 
     def detach_wagon(self):
@@ -57,18 +57,18 @@ class Train:
     def assign_route(self, route_train):
         if isinstance(route_train, Route):
             self.__route = route_train
-            self.__current_station = self.__route.stations[0]
+            self.__current_station = self.route.stations[0]
 
     def forward_movement(self):
-        self.__current_station = self.__route.stations[self.__route.stations.index(self.__current_station) + 1]
+        self.__current_station = self.route.stations[self.route.stations.index(self.current_station) + 1]
 
     def moving_backward(self):
-        self.__current_station = self.__route.stations[self.__route.stations.index(self.__current_station) - 1]
+        self.__current_station = self.route.stations[self.route.stations.index(self.current_station) - 1]
 
     def next_station(self):
-        if self.__route.stations.index(self.__current_station) + 1 != self.__route.stations[-1]:
-            return self.__route.stations[self.__route.stations.index(self.__current_station) + 1]
+        if self.route.stations.index(self.current_station) + 1 != self.route.stations[-1]:
+            return self.route.stations[self.route.stations.index(self.current_station) + 1]
 
     def previous_station(self):
-        if self.__current_station != self.__route.stations[0]:
-            return self.__route.stations[self.__route.stations.index(self.__current_station) - 1]
+        if self.current_station != self.route.stations[0]:
+            return self.route.stations[self.route.stations.index(self.current_station) - 1]

@@ -6,6 +6,9 @@ class Station:
         self.__name = name
         self.__trains = list()
 
+    def __repr__(self):
+        return f'Название станции - {self.name}'
+
     @property
     def name(self):
         return self.__name
