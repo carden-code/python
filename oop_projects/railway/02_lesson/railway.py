@@ -89,6 +89,22 @@ class Railway:
         for index in range(len(self.wagons)):
             print(f'{index + 1} - {self.wagons[index]}')
 
+    def choose_train(self):
+        for index in range(len(self.trains)):
+            print(f'{index + 1} - {self.trains[index]}')
+        choice = int(input('Введите соответствующий номер: '))
+        index_train = choice - 1
+        if index_train in range(len(self.trains)):
+            return self.trains[index_train]
+
+    def attach_wagon(self):
+        train = self.choose_train()
+        if self.wagons:
+            for wagon in self.wagons:
+                if wagon.wagon_type == train.train_type:
+                    train.attach_wagon(wagon)
+                    self.wagons.remove(wagon)
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -105,6 +121,9 @@ class Railway:
             self.create_cargo_wagon()
         elif menu_item == '6':
             self.list_wagons()
+        elif menu_item == '7':
+            self.attach_wagon()
+
 
         else:
             print('Повторите ввод')
