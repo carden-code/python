@@ -85,6 +85,10 @@ class Railway:
     def create_cargo_wagon(self):
         self.wagons.append(CargoWagon())
 
+    def list_wagons(self):
+        for index in range(len(self.wagons)):
+            print(f'{index + 1} - {self.wagons[index]}')
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -99,5 +103,8 @@ class Railway:
             self.create_passenger_wagon()
         elif menu_item == '5':
             self.create_cargo_wagon()
+        elif menu_item == '6':
+            self.list_wagons()
+
         else:
             print('Повторите ввод')
