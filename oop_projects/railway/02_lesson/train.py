@@ -4,7 +4,7 @@
 
 class Train:
     def __init__(self, number, train_type):
-        self.__number = number
+        self.__name = number
         self.__train_type = train_type
         self.__wagons = list()
         self.__current_speed = 0
@@ -12,7 +12,7 @@ class Train:
         self.__current_station = None
 
     def __repr__(self):
-        return f'Поезд номер - {self.number}, Тип - {self.train_type}'
+        return f'"{self.train_type} - {self.name}"'
 
     @property
     def current_station(self):
@@ -27,8 +27,8 @@ class Train:
         return self.__train_type
 
     @property
-    def number(self):
-        return self.__number
+    def name(self):
+        return self.__name
 
     @property
     def wagons(self):

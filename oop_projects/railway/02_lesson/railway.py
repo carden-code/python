@@ -1,4 +1,5 @@
 from station import Station
+from passenger_train import PassengerTrain
 
 
 class Railway:
@@ -47,7 +48,7 @@ class Railway:
         return args[0]
 
     @staticmethod
-    def is_dublicate_name(arr, name):
+    def is_duplicate_name(arr, name):
         if arr:
             for elem in arr:
                 if elem.name == str(name):
@@ -59,14 +60,23 @@ class Railway:
         message = ['Введите название станции:']
         name = self.data_input(message)
 
-        if name and self.is_dublicate_name(self.stations, name):
+        if name and self.is_duplicate_name(self.stations, name):
             self.stations.append(Station(name))
 
+    def create_passenger_train(self):
+        message = ['Введите номер поезда:']
+        number = self.data_input(message)
+
+        if number and self.is_duplicate_name(self.trains, number):
+            self.trains.append(PassengerTrain(number))
+
     def selected(self, menu_item):
-        if menu_item != '':
-            print(f"Your choice: {menu_item}")
+        if menu_item:
+            print(f"Ваш выбор: {menu_item}")
 
         if menu_item == '1':
             self.create_station()
+        elif menu_item == '2':
+            self.create_passenger_train()
         else:
             print('Повторите ввод')
