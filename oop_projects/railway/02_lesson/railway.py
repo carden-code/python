@@ -105,6 +105,11 @@ class Railway:
                     train.attach_wagon(wagon)
                     self.wagons.remove(wagon)
 
+    def detach_wagon(self):
+        train = self.choose_train()
+        wagon = train.detach_wagon()
+        self.wagons.append(wagon)
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -123,6 +128,8 @@ class Railway:
             self.list_wagons()
         elif menu_item == '7':
             self.attach_wagon()
+        elif menu_item == '8':
+            self.detach_wagon()
 
 
         else:
