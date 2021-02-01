@@ -2,6 +2,7 @@ from station import Station
 from passenger_train import PassengerTrain
 from cargo_train import CargoTrain
 from passenger_wagon import PassengerWagon
+from cargo_wagon import CargoWagon
 
 
 class Railway:
@@ -81,6 +82,9 @@ class Railway:
     def create_passenger_wagon(self):
         self.wagons.append(PassengerWagon())
 
+    def create_cargo_wagon(self):
+        self.wagons.append(CargoWagon())
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -91,5 +95,9 @@ class Railway:
             self.create_passenger_train()
         elif menu_item == '3':
             self.create_cargo_train()
+        elif menu_item == '4':
+            self.create_passenger_wagon()
+        elif menu_item == '5':
+            self.create_cargo_wagon()
         else:
             print('Повторите ввод')

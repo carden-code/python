@@ -12,7 +12,7 @@ class Train:
         self.__current_station = None
 
     def __repr__(self):
-        return f'"{self.train_type} - {self.name}"'
+        return f"'{self.train_type} - {self.name}'"
 
     @property
     def current_station(self):
