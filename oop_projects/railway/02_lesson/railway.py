@@ -43,17 +43,30 @@ class Railway:
             print(mess)
 
         args.append(input())
+        print(args[0])
+        return args[0]
 
     @staticmethod
     def is_dublicate_name(arr, name):
-        for elem in arr:
-            if elem.name == str(name):
-                return False
+        if arr:
+            for elem in arr:
+                if elem.name == str(name):
+                    return False
+                return True
         return True
 
     def create_station(self):
         message = ['Введите название станции:']
         name = self.data_input(message)
 
-        if name != '' and not self.is_dublicate_name(self.stations, name):
+        if name and self.is_dublicate_name(self.stations, name):
             self.stations.append(Station(name))
+
+    def selected(self, menu_item):
+        if menu_item != '':
+            print(f"Your choice: {menu_item}")
+
+        if menu_item == '1':
+            self.create_station()
+        else:
+            print('Повторите ввод')
