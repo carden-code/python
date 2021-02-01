@@ -1,5 +1,7 @@
 from station import Station
 from passenger_train import PassengerTrain
+from cargo_train import CargoTrain
+from passenger_wagon import PassengerWagon
 
 
 class Railway:
@@ -38,17 +40,16 @@ class Railway:
             print(item)
 
     @staticmethod
-    def data_input(message):
+    def _data_input(message):
         args = []
         for mess in message:
             print(mess)
 
         args.append(input())
-        print(args[0])
         return args[0]
 
     @staticmethod
-    def is_duplicate_name(arr, name):
+    def _is_duplicate_name(arr, name):
         if arr:
             for elem in arr:
                 if elem.name == str(name):
@@ -58,17 +59,27 @@ class Railway:
 
     def create_station(self):
         message = ['Введите название станции:']
-        name = self.data_input(message)
+        name = self._data_input(message)
 
-        if name and self.is_duplicate_name(self.stations, name):
+        if name and self._is_duplicate_name(self.stations, name):
             self.stations.append(Station(name))
 
     def create_passenger_train(self):
         message = ['Введите номер поезда:']
-        number = self.data_input(message)
+        number = self._data_input(message)
 
-        if number and self.is_duplicate_name(self.trains, number):
+        if number and self._is_duplicate_name(self.trains, number):
             self.trains.append(PassengerTrain(number))
+
+    def create_cargo_train(self):
+        message = ['Введите номер поезда:']
+        number = self._data_input(message)
+
+        if number and self._is_duplicate_name(self.trains, number):
+            self.trains.append(CargoTrain(number))
+
+    def create_passenger_wagon(self):
+        self.wagons.append(PassengerWagon())
 
     def selected(self, menu_item):
         if menu_item:
@@ -78,5 +89,7 @@ class Railway:
             self.create_station()
         elif menu_item == '2':
             self.create_passenger_train()
+        elif menu_item == '3':
+            self.create_cargo_train()
         else:
             print('Повторите ввод')
