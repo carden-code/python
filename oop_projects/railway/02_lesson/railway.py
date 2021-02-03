@@ -121,14 +121,19 @@ class Railway:
         wagon = train.detach_wagon()
         self.wagons.append(wagon)
 
+    def create_route(self):
+        if len(self.stations) > 2:
+            message_first = ['Выберете начальную станцию. Введите номер: ']
+            message_finish = ['Выберете конечную станцию. Введите номер: ']
+            first_station = self.choose_station(message_first)
+            finish_station = self.choose_station(message_finish)
+            route = Route(first_station, finish_station)
+            self.routes.append(route)
+
     def assign_route_train(self):
         message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
-        message_first = ['Выберете начальную станцию. Введите номер: ']
-        message_finish = ['Выберете конечную станцию. Введите номер: ']
         train = self.choose_train(message_train)
-        first_station = self.choose_station(message_first)
-        finish_station = self.choose_station(message_finish)
-        route = Route(first_station, finish_station)
+
         train.assign_route(route)
 
     def selected(self, menu_item):
