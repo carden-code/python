@@ -51,10 +51,8 @@ class Train:
                     self.__wagons.append(wagon)
 
     def detach_wagon(self):
-        wagon = None
         if self.__current_speed == 0 and self.__wagons:
-            wagon = self.__wagons.pop()
-        return wagon
+            return self.__wagons.pop()
 
     def assign_route(self, route_train):
         if isinstance(route_train, Route):

@@ -3,6 +3,7 @@ from passenger_train import PassengerTrain
 from cargo_train import CargoTrain
 from passenger_wagon import PassengerWagon
 from cargo_wagon import CargoWagon
+from route import Route
 
 
 class Railway:
@@ -51,32 +52,30 @@ class Railway:
 
     @staticmethod
     def _is_duplicate_name(arr, name):
-        if arr:
-            for elem in arr:
-                if elem.name == str(name):
-                    return False
+        for elem in arr:
+            if elem.name == str(name):
                 return True
-        return True
+        return False
 
     def create_station(self):
         message = ['Введите название станции:']
         name = self._data_input(message)
 
-        if name and self._is_duplicate_name(self.stations, name):
+        if name and not self._is_duplicate_name(self.stations, name):
             self.stations.append(Station(name))
 
     def create_passenger_train(self):
         message = ['Введите номер поезда:']
         number = self._data_input(message)
 
-        if number and self._is_duplicate_name(self.trains, number):
+        if number and not self._is_duplicate_name(self.trains, number):
             self.trains.append(PassengerTrain(number))
 
     def create_cargo_train(self):
         message = ['Введите номер поезда:']
         number = self._data_input(message)
 
-        if number and self._is_duplicate_name(self.trains, number):
+        if number and not self._is_duplicate_name(self.trains, number):
             self.trains.append(CargoTrain(number))
 
     def create_passenger_wagon(self):
@@ -89,16 +88,27 @@ class Railway:
         for index in range(len(self.wagons)):
             print(f'{index + 1} - {self.wagons[index]}')
 
-    def choose_train(self):
-        for index in range(len(self.trains)):
-            print(f'{index + 1} - {self.trains[index]}')
-        choice = int(input('Введите соответствующий номер: '))
-        index_train = choice - 1
-        if index_train in range(len(self.trains)):
-            return self.trains[index_train]
+    def choose_train(self, message):
+        if self.trains:
+            for index in range(len(self.trains)):
+                print(f'{index + 1} - {self.trains[index]}')
+            choice = int(self._data_input(message))
+            index_train = choice - 1
+            if index_train in range(len(self.trains)):
+                return self.trains[index_train]
+
+    def choose_station(self, message):
+        if self.stations:
+            for index in range(len(self.stations)):
+                print(f'{index + 1} - {self.stations[index]}')
+            choice = int(self._data_input(message))
+            index_station = choice - 1
+            if index_station in range(len(self.trains)):
+                return self.trains[index_station]
 
     def attach_wagon(self):
-        train = self.choose_train()
+        message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
+        train = self.choose_train(message)
         if self.wagons:
             for wagon in self.wagons:
                 if wagon.wagon_type == train.train_type:
@@ -106,7 +116,8 @@ class Railway:
                     self.wagons.remove(wagon)
 
     def detach_wagon(self):
-        train = self.choose_train()
+        message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
+        train = self.choose_train(message)
         wagon = train.detach_wagon()
         self.wagons.append(wagon)
 
@@ -130,7 +141,8 @@ class Railway:
             self.attach_wagon()
         elif menu_item == '8':
             self.detach_wagon()
-
+        elif menu_item == '9':
+            self.assign_route_train()
 
         else:
             print('Повторите ввод')
