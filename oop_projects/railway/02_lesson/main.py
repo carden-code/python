@@ -2,7 +2,6 @@
 from railway import Railway
 
 
-BORDERLINE = '-' * 50
 NEWLINE = "\n" * 2
 
 # Создаёт экземпляр класса Railway и выводит приветственное сообщение.

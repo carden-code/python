@@ -1,5 +1,3 @@
-# from station import Station
-
 
 class Route:
     def __init__(self, first_station, finish_station):
@@ -13,9 +11,9 @@ class Route:
         return self.__stations
 
     def add_station(self, station):
-        if isinstance(station, Station) and station not in self.stations:
+        if station not in self.stations:
             self.__stations.insert(-1, station)
 
     def del_station(self, station):
-        if isinstance(station, Station) and station != self.__stations[0] and station != self.__stations[-1]:
+        if station != self.__stations[0] and station != self.__stations[-1]:
             self.__stations.remove(station)

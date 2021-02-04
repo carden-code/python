@@ -92,19 +92,31 @@ class Railway:
         if self.trains:
             for index in range(len(self.trains)):
                 print(f'{index + 1} - {self.trains[index]}')
-            choice = int(self._data_input(message))
-            index_train = choice - 1
-            if index_train in range(len(self.trains)):
-                return self.trains[index_train]
+            choice = self._data_input(message)
+            if choice.isdigit():
+                index_train = int(choice) - 1
+                if index_train in range(len(self.trains)):
+                    return self.trains[index_train]
 
     def choose_station(self, message):
         if self.stations:
             for index in range(len(self.stations)):
                 print(f'{index + 1} - {self.stations[index]}')
-            choice = int(self._data_input(message))
-            index_station = choice - 1
-            if index_station in range(len(self.stations)):
-                return self.stations[index_station]
+            choice = self._data_input(message)
+            if choice.isdigit():
+                index_station = int(choice) - 1
+                if index_station in range(len(self.stations)):
+                    return self.stations[index_station]
+
+    def choose_route(self, message):
+        if self.routes:
+            for index in range(len(self.routes)):
+                print(f'{index + 1} - {self.routes[index]}')
+            choice = self._data_input(message)
+            if choice.isdigit():
+                index_route = int(choice) - 1
+                if index_route in range(len(self.routes)):
+                    return self.routes[index_route]
 
     def attach_wagon(self):
         if self.wagons:
@@ -132,9 +144,20 @@ class Railway:
             first_station = self.choose_station(message_first)
             finish_station = self.choose_station(message_finish)
             if first_station and finish_station:
-                if finish_station != finish_station:
+                if first_station != finish_station:
                     route = Route(first_station, finish_station)
                     self.routes.append(route)
+
+    def add_intermediate_station(self):
+        if self.routes:
+            message_route = ['Выберете маршрут в который нужно добавить промежуточную станцию: ']
+            message_station = ['Выберете станцию которую хотите добавить в маршрут: ']
+            route = self.choose_route(message_route)
+            if route:
+                station = self.choose_station(message_station)
+                if station:
+                    if station not in route.stations:
+                        route.add_station(station)
 
     # def assign_route_train(self):
     #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
@@ -164,6 +187,7 @@ class Railway:
             self.detach_wagon()
         elif menu_item == '9':
             self.create_route()
-
+        elif menu_item == '10':
+            self.add_intermediate_station()
         else:
             print('Повторите ввод')
