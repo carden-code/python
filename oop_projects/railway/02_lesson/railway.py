@@ -170,9 +170,11 @@ class Railway:
                     for index in range(len(intermediate_stations)):
                         print(f'{index + 1} {intermediate_stations[index]}')
                     choice = self._data_input(message_station)
-                    index_station = int(choice)
-                    station = route.stations[index_station]
-                    route.del_station(station)
+                    if choice.isdigit():
+                        index_station = int(choice)
+                        if index_station in range(len(route.stations)):
+                            station = route.stations[index_station]
+                            route.del_station(station)
 
     # def assign_route_train(self):
     #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
