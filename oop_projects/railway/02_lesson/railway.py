@@ -166,8 +166,9 @@ class Railway:
             route = self.choose_route(message_route)
             if route:
                 intermediate_stations = route.stations[1:-1]
-                for index in range(len(intermediate_stations)):
-                    print(f'{index + 1} {intermediate_stations[index]}')
+                if intermediate_stations:
+                    for index in range(len(intermediate_stations)):
+                        print(f'{index + 1} {intermediate_stations[index]}')
                     choice = self._data_input(message_station)
                     index_station = int(choice)
                     station = route.stations[index_station]
