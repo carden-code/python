@@ -103,8 +103,8 @@ class Railway:
                 print(f'{index + 1} - {self.stations[index]}')
             choice = int(self._data_input(message))
             index_station = choice - 1
-            if index_station in range(len(self.trains)):
-                return self.trains[index_station]
+            if index_station in range(len(self.stations)):
+                return self.stations[index_station]
 
     def attach_wagon(self):
         message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
@@ -122,19 +122,20 @@ class Railway:
         self.wagons.append(wagon)
 
     def create_route(self):
-        if len(self.stations) > 2:
+        if len(self.stations) > 1:
             message_first = ['Выберете начальную станцию. Введите номер: ']
             message_finish = ['Выберете конечную станцию. Введите номер: ']
             first_station = self.choose_station(message_first)
             finish_station = self.choose_station(message_finish)
-            route = Route(first_station, finish_station)
-            self.routes.append(route)
+            if first_station != finish_station:
+                route = Route(first_station, finish_station)
+                self.routes.append(route)
 
-    def assign_route_train(self):
-        message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
-        train = self.choose_train(message_train)
-
-        train.assign_route(route)
+    # def assign_route_train(self):
+    #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
+    #     train = self.choose_train(message_train)
+    #
+    #     train.assign_route(route)
 
     def selected(self, menu_item):
         if menu_item:
@@ -157,7 +158,7 @@ class Railway:
         elif menu_item == '8':
             self.detach_wagon()
         elif menu_item == '9':
-            self.assign_route_train()
+            self.create_route()
 
         else:
             print('Повторите ввод')

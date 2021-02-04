@@ -13,7 +13,7 @@ class Route:
         return self.__stations
 
     def add_station(self, station):
-        if isinstance(station, Station):
+        if isinstance(station, Station) and station not in self.stations:
             self.__stations.insert(-1, station)
 
     def del_station(self, station):
