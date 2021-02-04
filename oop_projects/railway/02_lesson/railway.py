@@ -159,6 +159,20 @@ class Railway:
                     if station not in route.stations:
                         route.add_station(station)
 
+    def del_intermediate_station(self):
+        if self.routes:
+            message_route = ['Выберете маршрут из которого нужно удалить промежуточную станцию: ']
+            message_station = ['Выберете станцию которую хотите удалить из маршрута: ']
+            route = self.choose_route(message_route)
+            if route:
+                intermediate_stations = route.stations[1:-1]
+                for index in range(len(intermediate_stations)):
+                    print(f'{index + 1} {intermediate_stations[index]}')
+                    choice = self._data_input(message_station)
+                    index_station = int(choice)
+                    station = route.stations[index_station]
+                    route.del_station(station)
+
     # def assign_route_train(self):
     #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
     #     train = self.choose_train(message_train)
@@ -189,5 +203,7 @@ class Railway:
             self.create_route()
         elif menu_item == '10':
             self.add_intermediate_station()
+        elif menu_item == '11':
+            self.del_intermediate_station()
         else:
             print('Повторите ввод')
