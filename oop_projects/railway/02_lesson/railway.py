@@ -72,7 +72,7 @@ class Railway:
             self.trains.append(PassengerTrain(number))
 
     def create_cargo_train(self):
-        message = ['Введите номер поезда:']
+        message = ['Введите номер поезда: ']
         number = self._data_input(message)
 
         if number and not self._is_duplicate_name(self.trains, number):
@@ -107,19 +107,23 @@ class Railway:
                 return self.stations[index_station]
 
     def attach_wagon(self):
-        message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
-        train = self.choose_train(message)
         if self.wagons:
-            for wagon in self.wagons:
-                if wagon.wagon_type == train.train_type:
-                    train.attach_wagon(wagon)
-                    self.wagons.remove(wagon)
+            message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
+            train = self.choose_train(message)
+            if train:
+                for wagon in self.wagons:
+                    if wagon.wagon_type == train.train_type:
+                        train.attach_wagon(wagon)
+                        self.wagons.remove(wagon)
 
     def detach_wagon(self):
-        message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
-        train = self.choose_train(message)
-        wagon = train.detach_wagon()
-        self.wagons.append(wagon)
+        if self.trains:
+            message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
+            train = self.choose_train(message)
+            if train:
+                if train.wagons:
+                    wagon = train.detach_wagon()
+                    self.wagons.append(wagon)
 
     def create_route(self):
         if len(self.stations) > 1:
@@ -127,9 +131,10 @@ class Railway:
             message_finish = ['Выберете конечную станцию. Введите номер: ']
             first_station = self.choose_station(message_first)
             finish_station = self.choose_station(message_finish)
-            if first_station != finish_station:
-                route = Route(first_station, finish_station)
-                self.routes.append(route)
+            if first_station and finish_station:
+                if finish_station != finish_station:
+                    route = Route(first_station, finish_station)
+                    self.routes.append(route)
 
     # def assign_route_train(self):
     #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
