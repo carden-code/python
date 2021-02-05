@@ -12,7 +12,9 @@ class Train:
         self.__current_station = None
 
     def __repr__(self):
-        return f"'{self.train_type} - {self.name}'"
+        if isinstance(self.__route, Route):
+            return f"'{self.train_type} - {self.name}, wagons: {len(self.wagons)}, route_id: {str(id(self.route))[-3:]}'"
+        return f"'{self.train_type} - {self.name}, wagons: {len(self.wagons)}'"
 
     @property
     def current_station(self):

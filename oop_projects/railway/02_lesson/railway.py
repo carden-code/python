@@ -150,8 +150,8 @@ class Railway:
 
     def add_intermediate_station(self):
         if self.routes:
-            message_route = ['Выберете маршрут в который нужно добавить промежуточную станцию: ']
-            message_station = ['Выберете станцию которую хотите добавить в маршрут: ']
+            message_route = ['Выберете маршрут, в который нужно добавить промежуточную станцию. Введите номер: ']
+            message_station = ['Выберете станцию, которую хотите добавить в маршрут. Введите номер: ']
             route = self.choose_route(message_route)
             if route:
                 station = self.choose_station(message_station)
@@ -161,8 +161,8 @@ class Railway:
 
     def del_intermediate_station(self):
         if self.routes:
-            message_route = ['Выберете маршрут из которого нужно удалить промежуточную станцию: ']
-            message_station = ['Выберете станцию которую хотите удалить из маршрута: ']
+            message_route = ['Выберете маршрут из которого нужно удалить промежуточную станцию. Введите номер: ']
+            message_station = ['Выберете станцию, которую хотите удалить из маршрута. Введите номер: ']
             route = self.choose_route(message_route)
             if route:
                 intermediate_stations = route.stations[1:-1]
@@ -176,11 +176,15 @@ class Railway:
                             station = route.stations[index_station]
                             route.del_station(station)
 
-    # def assign_route_train(self):
-    #     message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
-    #     train = self.choose_train(message_train)
-    #
-    #     train.assign_route(route)
+    def assign_route_train(self):
+        if self.routes and self.trains:
+            message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
+            train = self.choose_train(message_train)
+            if train:
+                message_route = ['Выберете маршрут, который нужно назначить поезду. Введите номер: ']
+                route = self.choose_route(message_route)
+                if route:
+                    train.assign_route(route)
 
     def selected(self, menu_item):
         if menu_item:
@@ -208,5 +212,7 @@ class Railway:
             self.add_intermediate_station()
         elif menu_item == '11':
             self.del_intermediate_station()
+        elif menu_item == '12':
+            self.assign_route_train()
         else:
             print('Повторите ввод')

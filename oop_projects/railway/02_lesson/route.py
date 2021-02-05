@@ -4,7 +4,7 @@ class Route:
         self.__stations = [first_station, finish_station]
 
     def __repr__(self):
-        return f'Маршрут - {self.stations}'
+        return f'Маршрут - {self.stations}(id:{str(id(self))[-3:]})'
 
     @property
     def stations(self):
