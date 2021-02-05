@@ -202,6 +202,16 @@ class Railway:
                 if train.route:
                     train.moving_backward()
 
+    def view_station_list(self):
+        print(self.stations)
+
+    def view_list_trains_station(self):
+        if self.stations:
+            message_station = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
+            station = self.choose_station(message_station)
+            if station:
+                print(station.trains)
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -234,5 +244,9 @@ class Railway:
             self.move_train_forward()
         elif menu_item == '14':
             self.move_train_back()
+        elif menu_item == '15':
+            self.view_station_list()
+        elif menu_item == '16':
+            self.view_list_trains_station()
         else:
             print('Повторите ввод')
