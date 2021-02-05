@@ -68,10 +68,12 @@ class Train:
             self.__current_station = self.route.stations[0]
 
     def forward_movement(self):
-        self.__current_station = self.route.stations[self.route.stations.index(self.current_station) + 1]
+        if self.current_station != self.route.stations[-1]:
+            self.__current_station = self.route.stations[self.route.stations.index(self.current_station) + 1]
 
     def moving_backward(self):
-        self.__current_station = self.route.stations[self.route.stations.index(self.current_station) - 1]
+        if self.current_station != self.route.stations[0]:
+            self.__current_station = self.route.stations[self.route.stations.index(self.current_station) - 1]
 
     def next_station(self):
         if self.route.stations.index(self.current_station) + 1 != self.route.stations[-1]:
