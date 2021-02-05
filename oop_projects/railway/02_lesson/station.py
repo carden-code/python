@@ -27,7 +27,7 @@ class Station:
     def trains(self):
         return self.__trains
 
-    # Принимает поез добавляя объект класса Train в атрибут trains
+    # Принимает поез добавляя объект класса Train в атрибут trains.
     def arrival(self, train):
         if isinstance(train, Train):
             self.trains.append(train)
