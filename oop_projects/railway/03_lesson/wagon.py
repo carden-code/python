@@ -1,9 +1,14 @@
+from module_company import ModuleCompany
+
+
 # Класс Wagon (Вагон):
 #  - Имеет тип(passenger/cargo), эти данные указываются при создании экземпляра класса.
 #  - Может возвращать тип вагона.
-class Wagon:
+class Wagon(ModuleCompany):
+
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, wagon_type):
+        super().__init__()
         self.__wagon_type = wagon_type
 
     # Развернутое отображение объекта класса Wagon(отображает тип вагона и id) в консоли.

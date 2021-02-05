@@ -1,3 +1,4 @@
+from module_company import ModuleCompany
 from wagon import Wagon
 from route import Route
 
@@ -17,7 +18,7 @@ from route import Route
 #  - Может перемещаться между станциями, указанными в маршруте.
 #       Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # - Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
-class Train:
+class Train(ModuleCompany):
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, number, train_type):
         self.__name = number
