@@ -194,6 +194,14 @@ class Railway:
                 if train.route:
                     train.forward_movement()
 
+    def move_train_back(self):
+        if self.trains:
+            message_train = ['Выберете поезд, который хотите переместить по маршруту назад. Введите номер: ']
+            train = self.choose_train(message_train)
+            if train:
+                if train.route:
+                    train.moving_backward()
+
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
@@ -224,5 +232,7 @@ class Railway:
             self.assign_route_train()
         elif menu_item == '13':
             self.move_train_forward()
+        elif menu_item == '14':
+            self.move_train_back()
         else:
             print('Повторите ввод')
