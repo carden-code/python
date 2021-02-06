@@ -3,11 +3,15 @@
 class ModuleCompany:
     # Принимает в виде параметра название компании и сохраняет его.
     def __init__(self):
-        self.name_company = None
-
-    def name_company(self, name):
-        self.name_company = name
+        self.__name_company = None
 
     # Возвращает название компании.
-    def return_company(self):
-        return self.name_company
+    @property
+    def name_company(self):
+        return self.__name_company
+
+    # Принимает название компании и записывает его в атрибут.
+    @name_company.setter
+    def name_company(self, name):
+        self.__name_company = name
+
