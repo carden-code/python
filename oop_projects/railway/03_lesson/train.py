@@ -19,6 +19,8 @@ from route import Route
 #       Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # - Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
 class Train(ModuleCompany):
+    trains = {}
+
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, number, train_type):
         self.__name = number
@@ -27,6 +29,7 @@ class Train(ModuleCompany):
         self.__current_speed = 0
         self.__route = None
         self.__current_station = None
+        Train.trains[number] = self
 
     # Развернутое отображение объекта класса Train в консоли.
     def __repr__(self):
@@ -39,6 +42,15 @@ class Train(ModuleCompany):
         return f"'number: {self.name} " \
                f"type: {self.train_type} " \
                f"wagons: {len(self.wagons)}'"
+
+    # Метод класса find, который принимает номер поезда (указанный при его создании)
+    # и возвращает объект поезда по номеру или None, если поезд с таким номером не найден.
+    @classmethod
+    def find(cls, number):
+        try:
+            return cls.trains[number]
+        except KeyError:
+            return None
 
     # Возвращает защищенный атрибут __current_station (Текущая станция).
     @property
