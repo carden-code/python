@@ -1,8 +1,8 @@
 from station import Station
 from passenger_train import PassengerTrain
 from cargo_train import CargoTrain
-from passenger_wagon import PassengerWagon
-from cargo_wagon import CargoWagon
+from passenger_wagon import PassengerTrainCar
+from cargo_wagon import CargoTrainCar
 from route import Route
 
 
@@ -98,11 +98,11 @@ class Railway:
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
-        self.wagons.append(PassengerWagon())
+        self.wagons.append(PassengerTrainCar())
 
     # Создаёт грузовой вагон, добавляет его в атрибут wagons.
     def create_cargo_wagon(self):
-        self.wagons.append(CargoWagon())
+        self.wagons.append(CargoTrainCar())
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):

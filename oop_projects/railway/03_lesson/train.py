@@ -1,5 +1,5 @@
 from module_company import ModuleCompany
-from wagon import Wagon
+from train_car import TrainCar
 from route import Route
 
 
@@ -21,7 +21,6 @@ from route import Route
 class Train(ModuleCompany):
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, number, train_type):
-        super().__init__()
         self.__name = number
         self.__train_type = train_type
         self.__wagons = list()
@@ -82,7 +81,7 @@ class Train(ModuleCompany):
     # Прицеплет вагон к поезду если поезд стоит и типы совпадают.
     def attach_wagon(self, wagon):
         if self.__current_speed == 0:
-            if isinstance(wagon, Wagon):
+            if isinstance(wagon, TrainCar):
                 if wagon.wagon_type == self.train_type:
                     self.__wagons.append(wagon)
 

@@ -1,7 +1,4 @@
-# Модуль Company содержит методы которые могут
-# указывать название компании-производителя и получать его.
+# Модуль Company добавля атрибут
 class ModuleCompany:
-    # Принимает в виде параметра название компании и сохраняет его.
-    def __init__(self):
-        self.name_company = None
-
+    def company(self, name):
+        self.company = name

@@ -8,14 +8,22 @@ from train import Train
 #   - Может возвращать список поездов на станции по типу: кол-во грузовых, пассажирских.
 #   - Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
 class Station:
+    stations = []
+
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, name):
         self.__name = name
-        self.__trains = list()
+        self.__trains = []
+        Station.stations.append(self)
 
     # Развернутое отображение объекта класса Station(отображает имя станции) в консоли.
     def __repr__(self):
         return f"'Станция - {self.name}'"
+
+    # Возвращает все созданные экземпляры класса
+    @classmethod
+    def all_station(cls):
+        return cls.stations
 
     # Возвращает защищенный атрибут __name (Название станции).
     @property
