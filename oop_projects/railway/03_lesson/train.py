@@ -123,12 +123,16 @@ class Train(ModuleCompany):
             self.__current_station = self.previous_station()
             self.current_station.arrival(self)
 
+    # Возвращает индекс текущей станции в маршруте.
+    def index_current_station(self):
+        return self.route.stations.index(self.current_station)
+
     # Возвращает следущую станцию в маршруте.
     def next_station(self):
-        if self.route.stations.index(self.current_station) + 1 != self.route.stations[-1]:
-            return self.route.stations[self.route.stations.index(self.current_station) + 1]
+        if self.index_current_station() + 1 < len(self.route.stations):
+            return self.route.stations[self.index_current_station() + 1]
 
     # Возвращает предыдущую станцию в маршруте.
     def previous_station(self):
         if self.current_station != self.route.stations[0]:
-            return self.route.stations[self.route.stations.index(self.current_station) - 1]
+            return self.route.stations[self.index_current_station() - 1]
