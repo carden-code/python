@@ -113,8 +113,8 @@ class Railway:
     # Запрашивает у пользователя выбор поезда и возвращает его.
     def choose_train(self, message):
         if self.trains:
-            for index in range(len(self.trains)):
-                print(f'{index + 1} - {self.trains[index]}')
+            for index, train in enumerate(self.trains, 1):
+                print(f'{index} - {train}')
             choice = self._data_input(message)
             if choice.isdigit():
                 index_train = int(choice) - 1
@@ -125,8 +125,8 @@ class Railway:
     # Запрашивает у пользователя выбор станции и возвращает ее.
     def choose_station(self, message):
         if self.stations:
-            for index in range(len(self.stations)):
-                print(f'{index + 1} - {self.stations[index]}')
+            for index, station in enumerate(self.stations, 1):
+                print(f'{index} - {station}')
             choice = self._data_input(message)
             if choice.isdigit():
                 index_station = int(choice) - 1
@@ -137,8 +137,8 @@ class Railway:
     # Запрашивает у пользователя выбор маршрута и возвращает его.
     def choose_route(self, message):
         if self.routes:
-            for index in range(len(self.routes)):
-                print(f'{index + 1} - {self.routes[index]}')
+            for index, route in enumerate(self.routes, 1):
+                print(f'{index} - {route}')
             choice = self._data_input(message)
             if choice.isdigit():
                 index_route = int(choice) - 1
