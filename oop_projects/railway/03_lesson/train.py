@@ -1,6 +1,7 @@
 from module_company import ModuleCompany
 from train_car import TrainCar
 from route import Route
+from instance_counter import InstanceCounter
 
 
 # Класс Train (Поезд):
@@ -18,7 +19,7 @@ from route import Route
 #  - Может перемещаться между станциями, указанными в маршруте.
 #       Перемещение возможно вперед и назад, но только на 1 станцию за раз.
 # - Возвращать предыдущую станцию, текущую, следующую, на основе маршрута
-class Train(ModuleCompany):
+class Train(ModuleCompany, InstanceCounter):
     trains = {}
 
     # Иницилизация объекта. Создаёт атрибуты объекта.
@@ -29,6 +30,7 @@ class Train(ModuleCompany):
         self.__current_speed = 0
         self.__route = None
         self.__current_station = None
+        self.register_instance()
         Train.trains[number] = self
 
     # Развернутое отображение объекта класса Train в консоли.

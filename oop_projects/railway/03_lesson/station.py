@@ -1,3 +1,4 @@
+from instance_counter import InstanceCounter
 from train import Train
 
 
@@ -7,13 +8,14 @@ from train import Train
 #   - Может возвращать список всех поездов на станции, находящиеся в текущий момент.
 #   - Может возвращать список поездов на станции по типу: кол-во грузовых, пассажирских.
 #   - Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
-class Station:
+class Station(InstanceCounter):
     stations = []
 
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, name):
         self.__name = name
         self.__trains = []
+        self.register_instance()
         Station.stations.append(self)
 
     # Развернутое отображение объекта класса Station(отображает имя станции) в консоли.
