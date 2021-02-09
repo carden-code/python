@@ -207,8 +207,8 @@ class Railway:
             if route:
                 intermediate_stations = route.stations[1:-1]
                 if intermediate_stations:
-                    for index in range(len(intermediate_stations)):
-                        print(f'{index + 1} {intermediate_stations[index]}')
+                    for index, station in enumerate(intermediate_stations, 1):
+                        print(f'{index} {station}')
                     choice = self._data_input(message_station)
                     if choice.isdigit():
                         index_station = int(choice)
