@@ -25,6 +25,7 @@ class Train(ModuleCompany, InstanceCounter):
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, number, train_type):
         self.__name = number
+        self.is_valid()
         self.__train_type = train_type
         self.__wagons = list()
         self.__current_speed = 0
@@ -138,3 +139,17 @@ class Train(ModuleCompany, InstanceCounter):
     def previous_station(self):
         if self.current_station != self.route.stations[0]:
             return self.route.stations[self.index_current_station() - 1]
+
+    def is_valid(self):
+        if len(self.name) in [5, 6]:
+            if self.name[:3].isalnum():
+                if self.name[3:4] == '-' and self.name[4:].isalnum():
+                    return True
+                elif self.name[3:].isalnum():
+                    return True
+                else:
+                    raise ValueError('Не правильный формат.')
+            else:
+                raise ValueError('Не правильный формат.')
+        else:
+            raise ValueError('Не правильный формат.')
