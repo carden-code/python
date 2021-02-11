@@ -86,7 +86,10 @@ class Railway:
         number = self._data_input(message)
 
         if number and not self._is_duplicate_name(self.trains, number):
-            self.trains.append(PassengerTrain(number))
+            try:
+                self.trains.append(PassengerTrain(number))
+            except ValueError:
+                return None
 
     # Запрашивает у пользователя номер поезда и создаёт грузовой поезд, добавляет его в атрибут trains.
     def create_cargo_train(self):
