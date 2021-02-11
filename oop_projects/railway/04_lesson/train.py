@@ -140,6 +140,9 @@ class Train(ModuleCompany, InstanceCounter):
         if self.current_station != self.route.stations[0]:
             return self.route.stations[self.index_current_station() - 1]
 
+    # Проверка формата номера поезда.
+    # Допустимый формат: три буквы или цифры в любом порядке,
+    # необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса.
     def is_valid(self):
         if len(self.name) in [5, 6]:
             if self.name[:3].isalnum():
