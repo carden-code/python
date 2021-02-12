@@ -55,8 +55,9 @@ class Station(InstanceCounter):
     def send_train(self, train):
         self.__trains.remove(train)
 
+    # Прверка формата названия станции. Больше 2х букв или цифр.
     def is_valid(self):
-        if len(self.__name) > 3 and self.__name.isalnum():
+        if len(self.__name) >= 3 and self.__name.isalnum():
             return True
         else:
-            raise ValueError('Название должно быть больше трёх букв или цифр.')
+            raise ValueError('Название должно быть больше 2х букв или цифр.')

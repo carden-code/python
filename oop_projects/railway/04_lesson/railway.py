@@ -84,7 +84,7 @@ class Railway:
 
     # Запрашивает у пользователя название станции и создаёт станцию, добавляет ее в атрибут stations.
     def create_station(self):
-        message = ['Введите название станции(Формат: больше 3х букв или цифр.):']
+        message = ['Введите название станции(Формат: больше 2х букв или цифр.):']
         name = self._data_input(message)
 
         if name and not self._is_duplicate_name(self.stations, name):
@@ -288,42 +288,22 @@ class Railway:
             if station:
                 print(station.trains)
 
-    # Принимает значение из меню (menu_item) и вызывает соответствующий метод.
+    # Содержит методы для управления железной дорогой. Возвращает словарь.
+    def dict_methods(self):
+        dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
+                  '4': self.create_passenger_wagon, '5': self.create_cargo_wagon, '6': self.list_wagons,
+                  '7': self.attach_wagon, '8': self.detach_wagon, '9': self.create_route,
+                  '10': self.add_intermediate_station, '11': self.del_intermediate_station,
+                  '12': self.assign_route_train, '13': self.move_train_forward, '14': self.move_train_back,
+                  '15': self.view_station_list, '16': self.view_list_trains_station}
+        return dict_m
+
+    # Принимает значение из меню (menu_item) и вызывает соответствующий метод из словаря dict_m.
     def selected(self, menu_item):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
-
-        if menu_item == '1':
-            self.create_station()
-        elif menu_item == '2':
-            self.create_passenger_train()
-        elif menu_item == '3':
-            self.create_cargo_train()
-        elif menu_item == '4':
-            self.create_passenger_wagon()
-        elif menu_item == '5':
-            self.create_cargo_wagon()
-        elif menu_item == '6':
-            self.list_wagons()
-        elif menu_item == '7':
-            self.attach_wagon()
-        elif menu_item == '8':
-            self.detach_wagon()
-        elif menu_item == '9':
-            self.create_route()
-        elif menu_item == '10':
-            self.add_intermediate_station()
-        elif menu_item == '11':
-            self.del_intermediate_station()
-        elif menu_item == '12':
-            self.assign_route_train()
-        elif menu_item == '13':
-            self.move_train_forward()
-        elif menu_item == '14':
-            self.move_train_back()
-        elif menu_item == '15':
-            self.view_station_list()
-        elif menu_item == '16':
-            self.view_list_trains_station()
-        else:
-            print('Повторите ввод')
+            dict_m = self.dict_methods()
+            try:
+                dict_m[menu_item]()
+            except KeyError:
+                print('Ошибка - Повторите ввод')
