@@ -91,6 +91,7 @@ class Railway:
             try:
                 station = Station(name)
                 self.stations.append(station)
+                self.object_created_successfully(station)
             except ValueError as val:
                 self.unsuccessful_object_creation(val)
                 return None
@@ -117,16 +118,21 @@ class Railway:
             try:
                 cargo_train = CargoTrain(number)
                 self.trains.append(cargo_train)
+                self.object_created_successfully(cargo_train)
             except ValueError as val:
                 self.unsuccessful_object_creation(val)
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
-        self.wagons.append(PassengerTrainCar())
+        passenger_wagon = PassengerTrainCar()
+        self.wagons.append(passenger_wagon)
+        self.object_created_successfully(passenger_wagon)
 
     # Создаёт грузовой вагон, добавляет его в атрибут wagons.
     def create_cargo_wagon(self):
-        self.wagons.append(CargoTrainCar())
+        cargo_wagon = CargoTrainCar()
+        self.wagons.append(cargo_wagon)
+        self.object_created_successfully(cargo_wagon)
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
@@ -277,7 +283,7 @@ class Railway:
 
     # Печатает список станций.
     def view_station_list(self):
-        print(self.stations)
+        print(f'Список станций - {self.stations}')
 
     # Выводит список поездов на станции.
     # Запрашивает у пользователя выбор станции и выводит все поезда на этой станции.
@@ -286,7 +292,7 @@ class Railway:
             message_station = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
             station = self.choose_station(message_station)
             if station:
-                print(station.trains)
+                print(f'Список поездов на станции - {station.trains}')
 
     # Содержит методы для управления железной дорогой. Возвращает словарь.
     def dict_methods(self):
