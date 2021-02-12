@@ -72,13 +72,26 @@ class Railway:
                 return True
         return False
 
+    @staticmethod
+    def object_created_successfully(instance):
+        print(f'Объект {instance.__class__.__name__} успешно создан.')
+
+    @staticmethod
+    def unsuccessful_object_creation(exception):
+        print(f'Ошибка - {exception}')
+
     # Запрашивает у пользователя название станции и создаёт станцию, добавляет ее в атрибут stations.
     def create_station(self):
         message = ['Введите название станции:']
         name = self._data_input(message)
 
         if name and not self._is_duplicate_name(self.stations, name):
-            self.stations.append(Station(name))
+            try:
+                station = Station(name)
+                self.stations.append(station)
+            except ValueError as val:
+                self.unsuccessful_object_creation(val)
+                return None
 
     # Запрашивает у пользователя номер поезда и создаёт пассажирский поезд, добавляет его в атрибут trains.
     def create_passenger_train(self):
@@ -87,8 +100,11 @@ class Railway:
 
         if number and not self._is_duplicate_name(self.trains, number):
             try:
-                self.trains.append(PassengerTrain(number))
-            except ValueError:
+                passenger_train = PassengerTrain(number)
+                self.trains.append(passenger_train)
+                self.object_created_successfully(passenger_train)
+            except ValueError as val:
+                self.unsuccessful_object_creation(val)
                 return None
 
     # Запрашивает у пользователя номер поезда и создаёт грузовой поезд, добавляет его в атрибут trains.

@@ -14,6 +14,7 @@ class Station(InstanceCounter):
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, name):
         self.__name = name
+        self.is_valid()
         self.__trains = []
         self.register_instance()
         Station.stations.append(self)
@@ -53,3 +54,9 @@ class Station(InstanceCounter):
     # Отправляет поез со станции, удаляя его из атрибута trains.
     def send_train(self, train):
         self.__trains.remove(train)
+
+    def is_valid(self):
+        if len(self.__name) > 3 and self.__name.isalnum():
+            return True
+        else:
+            raise ValueError('Название должно быть больше трёх букв или цифр.')

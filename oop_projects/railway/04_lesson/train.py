@@ -144,15 +144,15 @@ class Train(ModuleCompany, InstanceCounter):
     # Допустимый формат: три буквы или цифры в любом порядке,
     # необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса.
     def is_valid(self):
-        if len(self.name) in [5, 6]:
-            if self.name[:3].isalnum():
-                if self.name[3:4] == '-' and self.name[4:].isalnum():
+        if len(self.__name) in [5, 6]:
+            if self.__name[:3].isalnum():
+                if self.__name[3:4] == '-' and self.__name[4:].isalnum():
                     return True
-                elif self.name[3:].isalnum():
+                elif self.__name[3:].isalnum():
                     return True
                 else:
-                    raise ValueError('Не правильный формат.')
+                    raise ValueError('Не верный формат.')
             else:
-                raise ValueError('Не правильный формат.')
+                raise ValueError('Не верный формат.')
         else:
-            raise ValueError('Не правильный формат.')
+            raise ValueError('Не верный формат.')
