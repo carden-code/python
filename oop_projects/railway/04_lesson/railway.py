@@ -72,17 +72,19 @@ class Railway:
                 return True
         return False
 
+    # Принимает экземпляр класса и выводит сообщение с названием класса.
     @staticmethod
     def object_created_successfully(instance):
         print(f'Объект {instance.__class__.__name__} успешно создан.')
 
+    # Принимает экземпляр класса и выводит сообщение об ошибке.
     @staticmethod
     def unsuccessful_object_creation(exception):
         print(f'Ошибка - {exception}')
 
     # Запрашивает у пользователя название станции и создаёт станцию, добавляет ее в атрибут stations.
     def create_station(self):
-        message = ['Введите название станции:']
+        message = ['Введите название станции(Формат: больше 3х букв или цифр.):']
         name = self._data_input(message)
 
         if name and not self._is_duplicate_name(self.stations, name):
@@ -95,7 +97,7 @@ class Railway:
 
     # Запрашивает у пользователя номер поезда и создаёт пассажирский поезд, добавляет его в атрибут trains.
     def create_passenger_train(self):
-        message = ['Введите номер поезда:']
+        message = ['Введите номер поезда(Формат: 123-AA; 123456):']
         number = self._data_input(message)
 
         if number and not self._is_duplicate_name(self.trains, number):
@@ -105,15 +107,18 @@ class Railway:
                 self.object_created_successfully(passenger_train)
             except ValueError as val:
                 self.unsuccessful_object_creation(val)
-                return None
 
     # Запрашивает у пользователя номер поезда и создаёт грузовой поезд, добавляет его в атрибут trains.
     def create_cargo_train(self):
-        message = ['Введите номер поезда: ']
+        message = ['Введите номер поезда(Формат: 123-AA; 123456): ']
         number = self._data_input(message)
 
         if number and not self._is_duplicate_name(self.trains, number):
-            self.trains.append(CargoTrain(number))
+            try:
+                cargo_train = CargoTrain(number)
+                self.trains.append(cargo_train)
+            except ValueError as val:
+                self.unsuccessful_object_creation(val)
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
