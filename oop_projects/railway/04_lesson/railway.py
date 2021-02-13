@@ -152,11 +152,6 @@ class Railway:
         self.wagons.append(cargo_wagon)
         self.object_created_successfully(cargo_wagon)
 
-    # Выводит пронумерованный список созданных вагонов.
-    def list_wagons(self):
-        for index, wagon in enumerate(self.wagons, 1):
-            print(f'{index} - {wagon}')
-
     # Принимает сообщение. Выводит пронумерованный список поездов.
     # Запрашивает у пользователя выбор поезда и возвращает его.
     def choose_train(self, message):
@@ -290,6 +285,11 @@ class Railway:
             if train:
                 if train.route:
                     train.moving_backward()
+
+    # Выводит пронумерованный список созданных вагонов.
+    def list_wagons(self):
+        for index, wagon in enumerate(self.wagons, 1):
+            print(f'{index} - {wagon}')
 
     # Печатает список станций.
     def view_station_list(self):
