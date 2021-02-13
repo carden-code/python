@@ -138,14 +138,15 @@ class Railway:
             message_finish = ['Выберете конечную станцию. Введите номер: ']
             first_station = self.choose_station(message_first)
             finish_station = self.choose_station(message_finish)
-            if first_station and finish_station:
-                try:
-                    route = Route(first_station, finish_station)
-                except ValueError as val:
-                    self.print_unsuccessful(val)
-                else:
-                    self.routes.append(route)
-                    self.object_created_successfully(route)
+            try:
+                route = Route(first_station, finish_station)
+            except ValueError as val:
+                self.print_unsuccessful(val)
+            except AttributeError as atr:
+                self.print_unsuccessful(atr)
+            else:
+                self.routes.append(route)
+                self.object_created_successfully(route)
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):

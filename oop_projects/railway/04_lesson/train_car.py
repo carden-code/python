@@ -12,7 +12,7 @@ class TrainCar(ModuleCompany):
 
     # Развернутое отображение объекта класса Wagon(отображает тип вагона и id) в консоли.
     def __repr__(self):
-        return f"Тип - {self.wagon_type}(id - {str(id(self))[-3:]})"
+        return f"Тип: {self.wagon_type}(id - {str(id(self))[-3:]})"
 
     # Возвращает защищенный атрибут __wagon_type (Тип вагона).
     @property

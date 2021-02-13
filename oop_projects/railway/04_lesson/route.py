@@ -36,8 +36,11 @@ class Route(InstanceCounter):
     # Прверка при создании маршрута на одинаковые станции.
     # В случае если станции совпадают выбросит исключение.
     def __validate(self):
-        if self.__stations[0] == self.__stations[-1]:
-            raise ValueError('Станции совпадают!')
+        if self.__stations[0] and self.stations[-1]:
+            if self.__stations[0] == self.__stations[-1]:
+                raise ValueError('Станции совпадают!')
+        else:
+            raise AttributeError('Такой станции не существует!')
 
     # Проверка объекта на валидность. В случае не валидности выбросит исключение.
     def __is_valid(self):
