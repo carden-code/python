@@ -118,6 +118,8 @@ class Train(ModuleCompany, InstanceCounter):
             self.current_station.send_train(self)
             self.__current_station = self.next_station()
             self.current_station.arrival(self)
+        else:
+            raise IndexError('Перемещение вперед не возможно. Поезд находится на конечной станции.')
 
     # Перемещает поезд назад по маршруту, отправляя поезд с текущей станции на предыдущую.
     def moving_backward(self):
@@ -125,6 +127,8 @@ class Train(ModuleCompany, InstanceCounter):
             self.current_station.send_train(self)
             self.__current_station = self.previous_station()
             self.current_station.arrival(self)
+        else:
+            raise IndexError('Перемещение назад не возможно. Поезд находится на начальной станции.')
 
     # Возвращает индекс текущей станции в маршруте.
     def index_current_station(self):

@@ -79,8 +79,13 @@ class Railway:
 
     # Принимает экземпляр класса и выводит сообщение об ошибке.
     @staticmethod
-    def unsuccessful_object_creation(exception):
+    def print_unsuccessful(exception):
         print(f'Ошибка - {exception}')
+
+    # Сообщает о успешном совершении действия.
+    @staticmethod
+    def print_successfully():
+        print('Действие выполнено успешно.')
 
     # Запрашивает у пользователя название станции и создаёт станцию, добавляет ее в атрибут stations.
     def create_station(self):
@@ -90,11 +95,11 @@ class Railway:
         if name and not self._is_duplicate_name(self.stations, name):
             try:
                 station = Station(name)
+            except ValueError as val:
+                self.print_unsuccessful(val)
+            else:
                 self.stations.append(station)
                 self.object_created_successfully(station)
-            except ValueError as val:
-                self.unsuccessful_object_creation(val)
-                return None
 
     # Запрашивает у пользователя номер поезда и создаёт пассажирский поезд, добавляет его в атрибут trains.
     def create_passenger_train(self):
@@ -104,10 +109,11 @@ class Railway:
         if number and not self._is_duplicate_name(self.trains, number):
             try:
                 passenger_train = PassengerTrain(number)
+            except ValueError as val:
+                self.print_unsuccessful(val)
+            else:
                 self.trains.append(passenger_train)
                 self.object_created_successfully(passenger_train)
-            except ValueError as val:
-                self.unsuccessful_object_creation(val)
 
     # Запрашивает у пользователя номер поезда и создаёт грузовой поезд, добавляет его в атрибут trains.
     def create_cargo_train(self):
@@ -117,10 +123,11 @@ class Railway:
         if number and not self._is_duplicate_name(self.trains, number):
             try:
                 cargo_train = CargoTrain(number)
+            except ValueError as val:
+                self.print_unsuccessful(val)
+            else:
                 self.trains.append(cargo_train)
                 self.object_created_successfully(cargo_train)
-            except ValueError as val:
-                self.unsuccessful_object_creation(val)
 
     # Созздаёт маршрут.
     # Запрашивает у пользователя выбор начальной и конечной станции и создаёт новый маршрут.
@@ -135,7 +142,7 @@ class Railway:
                 try:
                     route = Route(first_station, finish_station)
                 except ValueError as val:
-                    self.unsuccessful_object_creation(val)
+                    self.print_unsuccessful(val)
                 else:
                     self.routes.append(route)
                     self.object_created_successfully(route)
@@ -214,6 +221,7 @@ class Railway:
                     if wagon.wagon_type == train.train_type:
                         train.attach_wagon(wagon)
                         self.wagons.remove(wagon)
+                        self.print_successfully()
 
     # Отцепляет вагон от поезда.
     # Выбор поезда и если у этого поезда есть вагоны отцепляет вагон и добавляет его в список вагонов.
@@ -225,6 +233,7 @@ class Railway:
                 if train.wagons:
                     wagon = train.detach_wagon()
                     self.wagons.append(wagon)
+                    self.print_successfully()
 
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
@@ -238,6 +247,7 @@ class Railway:
                 if station:
                     if station not in route.stations:
                         route.add_station(station)
+                        self.print_successfully()
 
     # Удаляет промежуточную станцию из маршрута.
     # Запрашивает выбор маршрута, выводит список промежуточных станций.
@@ -250,6 +260,7 @@ class Railway:
             if route:
                 station = self.choose_intermediate_station(route, message_station)
                 route.del_station(station)
+                self.print_successfully()
 
     # Присваивает маршрут поезду.
     # Запрашивает выбор поезда которому нужно назначить маршрут.
@@ -263,6 +274,7 @@ class Railway:
                 route = self.choose_route(message_route)
                 if route:
                     train.assign_route(route)
+                    self.print_successfully()
 
     # Перемещает поезд по маршруту вперед.
     # Запрашивает у пользователя выбор поезда.
@@ -273,7 +285,11 @@ class Railway:
             train = self.choose_train(message_train)
             if train:
                 if train.route:
-                    train.forward_movement()
+                    try:
+                        train.forward_movement()
+                        self.print_successfully()
+                    except IndexError as i:
+                        self.print_unsuccessful(i)
 
     # Перемещает поезд по маршруту назад.
     # Запрашивает у пользователя выбор поезда.
@@ -284,7 +300,11 @@ class Railway:
             train = self.choose_train(message_train)
             if train:
                 if train.route:
-                    train.moving_backward()
+                    try:
+                        train.moving_backward()
+                        self.print_successfully()
+                    except IndexError as i:
+                        self.print_unsuccessful(i)
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
