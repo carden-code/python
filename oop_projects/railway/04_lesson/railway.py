@@ -212,6 +212,7 @@ class Railway:
                 if first_station != finish_station:
                     route = Route(first_station, finish_station)
                     self.routes.append(route)
+                    self.object_created_successfully(route)
 
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
