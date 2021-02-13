@@ -122,6 +122,24 @@ class Railway:
             except ValueError as val:
                 self.unsuccessful_object_creation(val)
 
+    # Созздаёт маршрут.
+    # Запрашивает у пользователя выбор начальной и конечной станции и создаёт новый маршрут.
+    # Добавляет в список маршрутов.
+    def create_route(self):
+        if len(self.stations) > 1:
+            message_first = ['Выберете начальную станцию. Введите номер: ']
+            message_finish = ['Выберете конечную станцию. Введите номер: ']
+            first_station = self.choose_station(message_first)
+            finish_station = self.choose_station(message_finish)
+            if first_station and finish_station:
+                try:
+                    route = Route(first_station, finish_station)
+                except ValueError as val:
+                    self.unsuccessful_object_creation(val)
+                else:
+                    self.routes.append(route)
+                    self.object_created_successfully(route)
+
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
         passenger_wagon = PassengerTrainCar()
@@ -136,8 +154,8 @@ class Railway:
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
-        for index in range(len(self.wagons)):
-            print(f'{index + 1} - {self.wagons[index]}')
+        for index, wagon in enumerate(self.wagons, 1):
+            print(f'{index} - {wagon}')
 
     # Принимает сообщение. Выводит пронумерованный список поездов.
     # Запрашивает у пользователя выбор поезда и возвращает его.
@@ -175,6 +193,9 @@ class Railway:
                 if index_route in range(len(self.routes)):
                     return self.routes[index_route]
 
+    # Выводит список промежуточных станций.
+    # Запрашивает выбор пользователя.
+    # И возвращает выбранную станцию.
     def choose_intermediate_station(self, route, message):
         intermediate_stations = route.stations[1:-1]
         if intermediate_stations:
@@ -185,7 +206,6 @@ class Railway:
                 index_station = int(choice)
                 if index_station in range(len(route.stations)):
                     return route.stations[index_station]
-
 
     # Прицепляет вагон к поезду. Если есть созданные вагоны.
     # Выбор поезда и если есть вагоны одинакого типа с поездом,
@@ -210,24 +230,6 @@ class Railway:
                 if train.wagons:
                     wagon = train.detach_wagon()
                     self.wagons.append(wagon)
-
-    # Созздаёт маршрут.
-    # Запрашивает у пользователя выбор начальной и конечной станции и создаёт новый маршрут.
-    # Добавляет в список маршрутов.
-    def create_route(self):
-        if len(self.stations) > 1:
-            message_first = ['Выберете начальную станцию. Введите номер: ']
-            message_finish = ['Выберете конечную станцию. Введите номер: ']
-            first_station = self.choose_station(message_first)
-            finish_station = self.choose_station(message_finish)
-            if first_station and finish_station:
-                try:
-                    route = Route(first_station, finish_station)
-                except ValueError as val:
-                    self.unsuccessful_object_creation(val)
-                else:
-                    self.routes.append(route)
-                    self.object_created_successfully(route)
 
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
