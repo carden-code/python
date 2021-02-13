@@ -11,6 +11,7 @@ class Route(InstanceCounter):
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, first_station, finish_station):
         self.__stations = [first_station, finish_station]
+        self.__is_valid()
         self.register_instance()
 
     # Развернутое отображение объекта класса Route(отображает станции в маршруте и id) в консоли.
@@ -31,3 +32,16 @@ class Route(InstanceCounter):
     def del_station(self, station):
         if station != self.__stations[0] and station != self.__stations[-1]:
             self.__stations.remove(station)
+
+    # Прверка при создании маршрута на одинаковые станции.
+    # В случае если станции совпадают выбросит исключение.
+    def __validate(self):
+        if self.__stations[0] == self.__stations[-1]:
+            raise ValueError('Станции совпадают!')
+
+    # Проверка объекта на валидность. В случае не валидности выбросит исключение.
+    def __is_valid(self):
+        if not self.__validate():
+            return True
+        else:
+            return False

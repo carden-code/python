@@ -175,6 +175,18 @@ class Railway:
                 if index_route in range(len(self.routes)):
                     return self.routes[index_route]
 
+    def choose_intermediate_station(self, route, message):
+        intermediate_stations = route.stations[1:-1]
+        if intermediate_stations:
+            for index, station in enumerate(intermediate_stations, 1):
+                print(f'{index} {station}')
+            choice = self._data_input(message)
+            if choice.isdigit():
+                index_station = int(choice)
+                if index_station in range(len(route.stations)):
+                    return route.stations[index_station]
+
+
     # Прицепляет вагон к поезду. Если есть созданные вагоны.
     # Выбор поезда и если есть вагоны одинакого типа с поездом,
     # добавляет вагон к поезду и удаляет вагон из списка вагонов.
@@ -209,8 +221,11 @@ class Railway:
             first_station = self.choose_station(message_first)
             finish_station = self.choose_station(message_finish)
             if first_station and finish_station:
-                if first_station != finish_station:
+                try:
                     route = Route(first_station, finish_station)
+                except ValueError as val:
+                    self.unsuccessful_object_creation(val)
+                else:
                     self.routes.append(route)
                     self.object_created_successfully(route)
 
@@ -236,16 +251,8 @@ class Railway:
             message_station = ['Выберете станцию, которую хотите удалить из маршрута. Введите номер: ']
             route = self.choose_route(message_route)
             if route:
-                intermediate_stations = route.stations[1:-1]
-                if intermediate_stations:
-                    for index, station in enumerate(intermediate_stations, 1):
-                        print(f'{index} {station}')
-                    choice = self._data_input(message_station)
-                    if choice.isdigit():
-                        index_station = int(choice)
-                        if index_station in range(len(route.stations)):
-                            station = route.stations[index_station]
-                            route.del_station(station)
+                station = self.choose_intermediate_station(route, message_station)
+                route.del_station(station)
 
     # Присваивает маршрут поезду.
     # Запрашивает выбор поезда которому нужно назначить маршрут.
