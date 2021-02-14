@@ -52,6 +52,30 @@ class Railway:
         for item in messages:
             print(item)
 
+    def main_menu_items(self):
+        messages = ['Выберете действие, введя номер из списка.',
+                    self.__BORDERLINE,
+                    '1 - Создать объект.',
+                    '2 - Произвести действие над объектом.',
+                    '3 - Информация об объектах.'
+                    '0 - Для выхода из программы.']
+        for item in messages:
+            print(item)
+
+    def create_menu_items(self):
+        messages = ['Выберите действие, введя номер из списка: ',
+                    self.__BORDERLINE,
+                    ' 1 - Создать станцию.',
+                    ' 2 - Создать пассажирский поезд.',
+                    ' 3 - Создать грузовой поезд.',
+                    ' 4 - Создать пассажирский вагон.',
+                    ' 5 - Создать грузовой вагон.',
+                    ' 9 - Создать маршрут.']
+        for item in messages:
+            print(item)
+
+    def
+
     # Статический метод принимает сообщение и печатает его,
     # запрашивает значение у пользователя и возвращает его.
     @staticmethod
@@ -334,6 +358,9 @@ class Railway:
                   '12': self.assign_route_train, '13': self.move_train_forward, '14': self.move_train_back,
                   '15': self.view_station_list, '16': self.view_list_trains_station}
         return dict_m
+
+    def dict_methods_menu(self):
+        pass
 
     # Принимает значение из меню (menu_item) и вызывает соответствующий метод из словаря dict_m.
     def selected(self, menu_item):
