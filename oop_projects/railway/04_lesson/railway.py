@@ -76,7 +76,7 @@ class Railway:
         for item in messages:
             print(item)
 
-    def perform_actions_objects(self):
+    def perform_actions_objects_menu(self):
         messages = ['Выберите действие, введя номер из списка: ',
                     self.__BORDERLINE,
                     ' 1 - Прицепить вагон к поезду.',
@@ -86,6 +86,17 @@ class Railway:
                     ' 5 - Назначить маршрут поезду.',
                     ' 6 - Переместить поезд по маршруту вперед.',
                     ' 7 - Переместить поезд по маршруту назад.',
+                    self.__BORDERLINE,
+                    '  0 - Для возврата в предыдущее меню.']
+        for item in messages:
+            print(item)
+
+    def view_information_objects_menu(self):
+        messages = ['Выберите действие, введя номер из списка: ',
+                    self.__BORDERLINE,
+                    ' 1 - Посмотреть список вагонов.',
+                    ' 2 - Посмотреть список станций.',
+                    ' 3 - Посмотреть список поездов на станции.',
                     self.__BORDERLINE,
                     '  0 - Для возврата в предыдущее меню.']
         for item in messages:
