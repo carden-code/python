@@ -52,56 +52,6 @@ class Railway:
         for item in messages:
             print(item)
 
-    def main_menu_items(self):
-        messages = ['Выберете действие, введя номер из списка.',
-                    self.__BORDERLINE,
-                    '1 - Создать объект.',
-                    '2 - Произвести действие над объектом.',
-                    '3 - Информация об объектах.'
-                    '0 - Для выхода из программы.']
-        for item in messages:
-            print(item)
-
-    def create_menu_items(self):
-        messages = ['Выберите действие, введя номер из списка: ',
-                    self.__BORDERLINE,
-                    ' 1 - Создать станцию.',
-                    ' 2 - Создать пассажирский поезд.',
-                    ' 3 - Создать грузовой поезд.',
-                    ' 4 - Создать пассажирский вагон.',
-                    ' 5 - Создать грузовой вагон.',
-                    ' 9 - Создать маршрут.',
-                    self.__BORDERLINE,
-                    '  0 - Для возврата в предыдущее меню.']
-        for item in messages:
-            print(item)
-
-    def perform_actions_objects_menu(self):
-        messages = ['Выберите действие, введя номер из списка: ',
-                    self.__BORDERLINE,
-                    ' 1 - Прицепить вагон к поезду.',
-                    ' 2 - Отцепить вагон от поезда.',
-                    ' 3 - Добавить промежуточную станцию в маршрут.',
-                    ' 4 - Удалить промежуточную станцию из маршрута.',
-                    ' 5 - Назначить маршрут поезду.',
-                    ' 6 - Переместить поезд по маршруту вперед.',
-                    ' 7 - Переместить поезд по маршруту назад.',
-                    self.__BORDERLINE,
-                    '  0 - Для возврата в предыдущее меню.']
-        for item in messages:
-            print(item)
-
-    def view_information_objects_menu(self):
-        messages = ['Выберите действие, введя номер из списка: ',
-                    self.__BORDERLINE,
-                    ' 1 - Посмотреть список вагонов.',
-                    ' 2 - Посмотреть список станций.',
-                    ' 3 - Посмотреть список поездов на станции.',
-                    self.__BORDERLINE,
-                    '  0 - Для возврата в предыдущее меню.']
-        for item in messages:
-            print(item)
-
     # Статический метод принимает сообщение и печатает его,
     # запрашивает значение у пользователя и возвращает его.
     @staticmethod
@@ -375,25 +325,90 @@ class Railway:
             if station:
                 print(f'Список поездов на станции - {station.trains}')
 
-    # Содержит методы для управления железной дорогой. Возвращает словарь.
-    def dict_methods(self):
+    def dict_create_methods(self):
         dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
-                  '4': self.create_passenger_wagon, '5': self.create_cargo_wagon, '6': self.list_wagons,
-                  '7': self.attach_wagon, '8': self.detach_wagon, '9': self.create_route,
-                  '10': self.add_intermediate_station, '11': self.del_intermediate_station,
-                  '12': self.assign_route_train, '13': self.move_train_forward, '14': self.move_train_back,
-                  '15': self.view_station_list, '16': self.view_list_trains_station}
+                  '4': self.create_passenger_wagon, '5': self.create_cargo_wagon, '6': self.create_route}
         return dict_m
 
-    def dict_methods_menu(self):
-        pass
+    def dict_actions_methods(self):
+        dict_m = {'1': self.attach_wagon, '2': self.detach_wagon, '3': self.add_intermediate_station,
+                  '4': self.del_intermediate_station, '5': self.assign_route_train,
+                  '6': self.move_train_forward, '7': self.move_train_back}
+        return dict_m
+
+    def dict_info_methods(self):
+        dict_m = {'1': self.list_wagons,'2': self.view_station_list, '3': self.view_list_trains_station}
+        return dict_m
+
+    def main_menu_items(self):
+        messages = ['Выберете действие, введя номер из списка.',
+                    self.__BORDERLINE,
+                    '1 - Создать объект.',
+                    '2 - Произвести действие над объектом.',
+                    '3 - Информация об объектах.',
+                    '0 - Для выхода из программы.']
+        for item in messages:
+            print(item)
+
+    def create_menu_items(self):
+        messages = ['Выберите действие, введя номер из списка: ',
+                    self.__BORDERLINE,
+                    ' 1 - Создать станцию.',
+                    ' 2 - Создать пассажирский поезд.',
+                    ' 3 - Создать грузовой поезд.',
+                    ' 4 - Создать пассажирский вагон.',
+                    ' 5 - Создать грузовой вагон.',
+                    ' 6 - Создать маршрут.',
+                    self.__BORDERLINE,
+                    '  0 - Для возврата в предыдущее меню.']
+        for item in messages:
+            print(item)
+
+    def perform_actions_objects_menu(self):
+        messages = ['Выберите действие, введя номер из списка: ',
+                    self.__BORDERLINE,
+                    ' 1 - Прицепить вагон к поезду.',
+                    ' 2 - Отцепить вагон от поезда.',
+                    ' 3 - Добавить промежуточную станцию в маршрут.',
+                    ' 4 - Удалить промежуточную станцию из маршрута.',
+                    ' 5 - Назначить маршрут поезду.',
+                    ' 6 - Переместить поезд по маршруту вперед.',
+                    ' 7 - Переместить поезд по маршруту назад.',
+                    self.__BORDERLINE,
+                    '  0 - Для возврата в предыдущее меню.']
+        for item in messages:
+            print(item)
+
+    def view_information_objects_menu(self):
+        messages = ['Выберите действие, введя номер из списка: ',
+                    self.__BORDERLINE,
+                    ' 1 - Посмотреть список вагонов.',
+                    ' 2 - Посмотреть список станций.',
+                    ' 3 - Посмотреть список поездов на станции.',
+                    self.__BORDERLINE,
+                    '  0 - Для возврата в предыдущее меню.']
+        for item in messages:
+            print(item)
 
     # Принимает значение из меню (menu_item) и вызывает соответствующий метод из словаря dict_m.
-    def selected(self, menu_item):
+    def selected(self, menu_item, number_menu):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
-            dict_m = self.dict_methods()
-            try:
-                dict_m[menu_item]()
-            except KeyError:
-                print('Ошибка - Повторите ввод')
+            if number_menu == '1':
+                dict_m = self.dict_create_methods()
+                try:
+                    dict_m[menu_item]()
+                except KeyError:
+                    print('Ошибка - Повторите ввод')
+            elif number_menu == '2':
+                dict_m = self.dict_actions_methods()
+                try:
+                    dict_m[menu_item]()
+                except KeyError:
+                    print('Ошибка - Повторите ввод')
+            elif number_menu == '3':
+                dict_m = self.dict_info_methods()
+                try:
+                    dict_m[menu_item]()
+                except KeyError:
+                    print('Ошибка - Повторите ввод')
