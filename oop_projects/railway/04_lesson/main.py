@@ -20,29 +20,29 @@ while True:
     print(f"routes: {railway.routes}\n\n")
     print(NEWLINE)
     railway.main_menu_items()
-    item = input()
-    if item == '0':
+    number_menu = input()
+    if number_menu == '0':
         break
     while True:
-        if item == '1':
+        if number_menu == '1':
             railway.create_menu_items()
             menu_item = input()
             if menu_item == '0':
                 break
             else:
-                railway.selected(menu_item, item)
-        elif item == '2':
+                railway.selected(menu_item, number_menu)
+        elif number_menu == '2':
             railway.perform_actions_objects_menu()
             menu_item = input()
             if menu_item == '0':
                 break
             else:
-                railway.selected(menu_item, item)
-        elif item == '3':
+                railway.selected(menu_item, number_menu)
+        elif number_menu == '3':
             railway.view_information_objects_menu()
             menu_item = input()
             if menu_item == '0':
                 break
             else:
-                railway.selected(menu_item, item)
+                railway.selected(menu_item, number_menu)
 
