@@ -394,21 +394,14 @@ class Railway:
     def selected(self, menu_item, number_menu):
         if menu_item:
             print(f"Ваш выбор: {menu_item}")
+            dict_m = None
             if number_menu == '1':
                 dict_m = self.dict_create_methods()
-                try:
-                    dict_m[menu_item]()
-                except KeyError:
-                    print('Ошибка - Повторите ввод')
             elif number_menu == '2':
                 dict_m = self.dict_actions_methods()
-                try:
-                    dict_m[menu_item]()
-                except KeyError:
-                    print('Ошибка - Повторите ввод')
             elif number_menu == '3':
                 dict_m = self.dict_info_methods()
-                try:
-                    dict_m[menu_item]()
-                except KeyError:
-                    print('Ошибка - Повторите ввод')
+            try:
+                dict_m[menu_item]()
+            except KeyError:
+                print('Ошибка - Повторите ввод')
