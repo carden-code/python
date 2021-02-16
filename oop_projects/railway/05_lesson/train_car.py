@@ -7,8 +7,10 @@ from module_company import ModuleCompany
 class TrainCar(ModuleCompany):
 
     #  Иницилизация объекта. Создаёт атрибуты объекта.
-    def __init__(self, wagon_type):
+    def __init__(self, wagon_type, capacity):
         self.__wagon_type = wagon_type
+        self.capacity = int(capacity)
+        self.occupied = 0
 
     # Развернутое отображение объекта класса Wagon(отображает тип вагона и id) в консоли.
     def __repr__(self):
@@ -18,3 +20,10 @@ class TrainCar(ModuleCompany):
     @property
     def wagon_type(self):
         return self.__wagon_type
+
+    def return_available_seats(self):
+        return self.capacity
+
+    def return_occupied_places(self):
+        return self.occupied
+
