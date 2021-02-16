@@ -37,4 +37,3 @@ while True:
             break
         else:
             railway.selected(menu_item, number_menu)
-railway.
