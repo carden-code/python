@@ -27,6 +27,8 @@ class Route(InstanceCounter):
     def add_station(self, station):
         if station not in self.stations:
             self.__stations.insert(-1, station)
+        else:
+            raise ValueError('Станции совпадают!')
 
     # Удаляет промежуточную станцию из маршрута.
     def del_station(self, station):

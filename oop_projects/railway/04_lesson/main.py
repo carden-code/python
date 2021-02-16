@@ -14,16 +14,17 @@ print(NEWLINE)
 # Запуск меню (Цикл). С запросом ввода нужного пользователю пункта
 # и передаёт результат в виде параметра методу selected.
 while True:
-    print(f"stations: {railway.stations}\n\n")
-    print(f"trains: {railway.trains}\n\n")
-    print(f"wagons: {railway.wagons}\n\n")
-    print(f"routes: {railway.routes}\n\n")
-    print(NEWLINE)
     railway.main_menu_items()
     number_menu = input()
     if number_menu == '0':
         break
     while True:
+        print(NEWLINE)
+        print(f"stations: {railway.stations}\n\n")
+        print(f"trains: {railway.trains}\n\n")
+        print(f"wagons: {railway.wagons}\n\n")
+        print(f"routes: {railway.routes}\n\n")
+
         if number_menu == '1':
             railway.create_menu_items()
         elif number_menu == '2':

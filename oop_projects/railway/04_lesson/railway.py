@@ -246,9 +246,11 @@ class Railway:
             if route:
                 station = self.choose_station(message_station)
                 if station:
-                    if station not in route.stations:
+                    try:
                         route.add_station(station)
                         self.print_successfully()
+                    except ValueError as val:
+                        self.print_unsuccessful(val)
 
     # Удаляет промежуточную станцию из маршрута.
     # Запрашивает выбор маршрута, выводит список промежуточных станций.
@@ -337,7 +339,7 @@ class Railway:
         return dict_m
 
     def dict_info_methods(self):
-        dict_m = {'1': self.list_wagons,'2': self.view_station_list, '3': self.view_list_trains_station}
+        dict_m = {'1': self.list_wagons, '2': self.view_station_list, '3': self.view_list_trains_station}
         return dict_m
 
     def main_menu_items(self):
