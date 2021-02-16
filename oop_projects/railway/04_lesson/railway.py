@@ -26,36 +26,10 @@ class Railway:
         self.wagons = list()
         self.stations = list()
 
-    # Ввыводит меню (Список действий) в консоль.
-    def menu_items(self):
-        messages = ['Выберите действие, введя номер из списка: ',
-                    self.__BORDERLINE,
-                    ' 1 - Создать станцию.',
-                    ' 2 - Создать пассажирский поезд.',
-                    ' 3 - Создать грузовой поезд.',
-                    ' 4 - Создать пассажирский вагон.',
-                    ' 5 - Создать грузовой вагон.',
-                    ' 6 - Посмотреть список вагонов.',
-                    ' 7 - Прицепить вагон к поезду.',
-                    ' 8 - Отцепить вагон от поезда.',
-                    ' 9 - Создать маршрут.',
-                    ' 10 - Добавить промежуточную станцию в маршрут.',
-                    ' 11 - Удалить промежуточную станцию из маршрута.',
-                    ' 12 - Назначить маршрут поезду.',
-                    ' 13 - Переместить поезд по маршруту вперед.',
-                    ' 14 - Переместить поезд по маршруту назад.',
-                    ' 15 - Посмотреть список станций.',
-                    ' 16 - Посмотреть список поездов на станции.',
-                    self.__BORDERLINE,
-                    '  0 - Для выхода из программы.']
-
-        for item in messages:
-            print(item)
-
     # Статический метод принимает сообщение и печатает его,
     # запрашивает значение у пользователя и возвращает его.
     @staticmethod
-    def _data_input(message):
+    def __data_input(message):
         args = []
         for mess in message:
             print(mess)
@@ -66,7 +40,7 @@ class Railway:
     # Принимает список и строку и проверяет есть ли совпадения в списке.
     # Если есть возвращает True если нет False
     @staticmethod
-    def _is_duplicate_name(arr, name):
+    def __is_duplicate_name(arr, name):
         for elem in arr:
             if elem.name == str(name):
                 return True
@@ -74,60 +48,60 @@ class Railway:
 
     # Принимает экземпляр класса и выводит сообщение с названием класса.
     @staticmethod
-    def object_created_successfully(instance):
+    def __print_object_created_successfully(instance):
         print(f'Объект {instance.__class__.__name__} успешно создан.')
 
     # Принимает экземпляр класса и выводит сообщение об ошибке.
     @staticmethod
-    def print_unsuccessful(exception):
+    def __print_unsuccessful(exception):
         print(f'Ошибка - {exception}')
 
     # Сообщает о успешном совершении действия.
     @staticmethod
-    def print_successfully():
+    def __print_successfully():
         print('Действие выполнено успешно.')
 
     # Запрашивает у пользователя название станции и создаёт станцию, добавляет ее в атрибут stations.
     def create_station(self):
         message = ['Введите название станции(Формат: больше 2х букв или цифр.):']
-        name = self._data_input(message)
+        name = self.__data_input(message)
 
-        if name and not self._is_duplicate_name(self.stations, name):
+        if name and not self.__is_duplicate_name(self.stations, name):
             try:
                 station = Station(name)
             except ValueError as val:
-                self.print_unsuccessful(val)
+                self.__print_unsuccessful(val)
             else:
                 self.stations.append(station)
-                self.object_created_successfully(station)
+                self.__print_object_created_successfully(station)
 
     # Запрашивает у пользователя номер поезда и создаёт пассажирский поезд, добавляет его в атрибут trains.
     def create_passenger_train(self):
         message = ['Введите номер поезда(Формат: 123-AA; 123456):']
-        number = self._data_input(message)
+        number = self.__data_input(message)
 
-        if number and not self._is_duplicate_name(self.trains, number):
+        if number and not self.__is_duplicate_name(self.trains, number):
             try:
                 passenger_train = PassengerTrain(number)
             except ValueError as val:
-                self.print_unsuccessful(val)
+                self.__print_unsuccessful(val)
             else:
                 self.trains.append(passenger_train)
-                self.object_created_successfully(passenger_train)
+                self.__print_object_created_successfully(passenger_train)
 
     # Запрашивает у пользователя номер поезда и создаёт грузовой поезд, добавляет его в атрибут trains.
     def create_cargo_train(self):
         message = ['Введите номер поезда(Формат: 123-AA; 123456): ']
-        number = self._data_input(message)
+        number = self.__data_input(message)
 
-        if number and not self._is_duplicate_name(self.trains, number):
+        if number and not self.__is_duplicate_name(self.trains, number):
             try:
                 cargo_train = CargoTrain(number)
             except ValueError as val:
-                self.print_unsuccessful(val)
+                self.__print_unsuccessful(val)
             else:
                 self.trains.append(cargo_train)
-                self.object_created_successfully(cargo_train)
+                self.__print_object_created_successfully(cargo_train)
 
     # Созздаёт маршрут.
     # Запрашивает у пользователя выбор начальной и конечной станции и создаёт новый маршрут.
@@ -141,24 +115,24 @@ class Railway:
             try:
                 route = Route(first_station, finish_station)
             except ValueError as val:
-                self.print_unsuccessful(val)
+                self.__print_unsuccessful(val)
             except AttributeError as atr:
-                self.print_unsuccessful(atr)
+                self.__print_unsuccessful(atr)
             else:
                 self.routes.append(route)
-                self.object_created_successfully(route)
+                self.__print_object_created_successfully(route)
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
         passenger_wagon = PassengerTrainCar()
         self.wagons.append(passenger_wagon)
-        self.object_created_successfully(passenger_wagon)
+        self.__print_object_created_successfully(passenger_wagon)
 
     # Создаёт грузовой вагон, добавляет его в атрибут wagons.
     def create_cargo_wagon(self):
         cargo_wagon = CargoTrainCar()
         self.wagons.append(cargo_wagon)
-        self.object_created_successfully(cargo_wagon)
+        self.__print_object_created_successfully(cargo_wagon)
 
     # Принимает сообщение. Выводит пронумерованный список поездов.
     # Запрашивает у пользователя выбор поезда и возвращает его.
@@ -166,7 +140,7 @@ class Railway:
         if self.trains:
             for index, train in enumerate(self.trains, 1):
                 print(f'{index} - {train}')
-            choice = self._data_input(message)
+            choice = self.__data_input(message)
             if choice.isdigit():
                 index_train = int(choice) - 1
                 if index_train in range(len(self.trains)):
@@ -178,7 +152,7 @@ class Railway:
         if self.stations:
             for index, station in enumerate(self.stations, 1):
                 print(f'{index} - {station}')
-            choice = self._data_input(message)
+            choice = self.__data_input(message)
             if choice.isdigit():
                 index_station = int(choice) - 1
                 if index_station in range(len(self.stations)):
@@ -190,7 +164,7 @@ class Railway:
         if self.routes:
             for index, route in enumerate(self.routes, 1):
                 print(f'{index} - {route}')
-            choice = self._data_input(message)
+            choice = self.__data_input(message)
             if choice.isdigit():
                 index_route = int(choice) - 1
                 if index_route in range(len(self.routes)):
@@ -204,7 +178,7 @@ class Railway:
         if intermediate_stations:
             for index, station in enumerate(intermediate_stations, 1):
                 print(f'{index} {station}')
-            choice = self._data_input(message)
+            choice = self.__data_input(message)
             if choice.isdigit():
                 index_station = int(choice)
                 if index_station in range(len(route.stations)):
@@ -222,7 +196,7 @@ class Railway:
                     if wagon.wagon_type == train.train_type:
                         train.attach_wagon(wagon)
                         self.wagons.remove(wagon)
-                        self.print_successfully()
+                        self.__print_successfully()
 
     # Отцепляет вагон от поезда.
     # Выбор поезда и если у этого поезда есть вагоны отцепляет вагон и добавляет его в список вагонов.
@@ -234,7 +208,7 @@ class Railway:
                 if train.wagons:
                     wagon = train.detach_wagon()
                     self.wagons.append(wagon)
-                    self.print_successfully()
+                    self.__print_successfully()
 
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
@@ -248,9 +222,9 @@ class Railway:
                 if station:
                     try:
                         route.add_station(station)
-                        self.print_successfully()
+                        self.__print_successfully()
                     except ValueError as val:
-                        self.print_unsuccessful(val)
+                        self.__print_unsuccessful(val)
 
     # Удаляет промежуточную станцию из маршрута.
     # Запрашивает выбор маршрута, выводит список промежуточных станций.
@@ -263,7 +237,7 @@ class Railway:
             if route:
                 station = self.choose_intermediate_station(route, message_station)
                 route.del_station(station)
-                self.print_successfully()
+                self.__print_successfully()
 
     # Присваивает маршрут поезду.
     # Запрашивает выбор поезда которому нужно назначить маршрут.
@@ -277,7 +251,7 @@ class Railway:
                 route = self.choose_route(message_route)
                 if route:
                     train.assign_route(route)
-                    self.print_successfully()
+                    self.__print_successfully()
 
     # Перемещает поезд по маршруту вперед.
     # Запрашивает у пользователя выбор поезда.
@@ -290,9 +264,9 @@ class Railway:
                 if train.route:
                     try:
                         train.forward_movement()
-                        self.print_successfully()
+                        self.__print_successfully()
                     except IndexError as i:
-                        self.print_unsuccessful(i)
+                        self.__print_unsuccessful(i)
 
     # Перемещает поезд по маршруту назад.
     # Запрашивает у пользователя выбор поезда.
@@ -305,9 +279,9 @@ class Railway:
                 if train.route:
                     try:
                         train.moving_backward()
-                        self.print_successfully()
+                        self.__print_successfully()
                     except IndexError as i:
-                        self.print_unsuccessful(i)
+                        self.__print_unsuccessful(i)
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
@@ -327,18 +301,18 @@ class Railway:
             if station:
                 print(f'Список поездов на станции - {station.trains}')
 
-    def dict_create_methods(self):
+    def __dict_create_methods(self):
         dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
                   '4': self.create_passenger_wagon, '5': self.create_cargo_wagon, '6': self.create_route}
         return dict_m
 
-    def dict_actions_methods(self):
+    def __dict_actions_methods(self):
         dict_m = {'1': self.attach_wagon, '2': self.detach_wagon, '3': self.add_intermediate_station,
                   '4': self.del_intermediate_station, '5': self.assign_route_train,
                   '6': self.move_train_forward, '7': self.move_train_back}
         return dict_m
 
-    def dict_info_methods(self):
+    def __dict_info_methods(self):
         dict_m = {'1': self.list_wagons, '2': self.view_station_list, '3': self.view_list_trains_station}
         return dict_m
 
@@ -398,11 +372,11 @@ class Railway:
             print(f"Ваш выбор: {menu_item}")
             dict_m = None
             if number_menu == '1':
-                dict_m = self.dict_create_methods()
+                dict_m = self.__dict_create_methods()
             elif number_menu == '2':
-                dict_m = self.dict_actions_methods()
+                dict_m = self.__dict_actions_methods()
             elif number_menu == '3':
-                dict_m = self.dict_info_methods()
+                dict_m = self.__dict_info_methods()
             try:
                 dict_m[menu_item]()
             except KeyError:
