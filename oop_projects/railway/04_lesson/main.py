@@ -26,23 +26,13 @@ while True:
     while True:
         if number_menu == '1':
             railway.create_menu_items()
-            menu_item = input()
-            if menu_item == '0':
-                break
-            else:
-                railway.selected(menu_item, number_menu)
         elif number_menu == '2':
             railway.perform_actions_objects_menu()
-            menu_item = input()
-            if menu_item == '0':
-                break
-            else:
-                railway.selected(menu_item, number_menu)
         elif number_menu == '3':
             railway.view_information_objects_menu()
-            menu_item = input()
-            if menu_item == '0':
-                break
-            else:
-                railway.selected(menu_item, number_menu)
+        menu_item = input()
 
+        if menu_item == '0':
+            break
+        else:
+            railway.selected(menu_item, number_menu)
