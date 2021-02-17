@@ -124,15 +124,27 @@ class Railway:
 
     # Создаёт пассажирский вагон, добавляет его в атрибут wagons.
     def create_passenger_wagon(self):
-        passenger_wagon = PassengerTrainCar()
-        self.wagons.append(passenger_wagon)
-        self.__print_object_created_successfully(passenger_wagon)
+        message = ['Введите колличество мест в вагоне: ']
+        capacity = self.__data_input(message)
+        try:
+            passenger_wagon = PassengerTrainCar(capacity)
+        except ValueError as val:
+            self.__print_unsuccessful(val)
+        else:
+            self.wagons.append(passenger_wagon)
+            self.__print_object_created_successfully(passenger_wagon)
 
     # Создаёт грузовой вагон, добавляет его в атрибут wagons.
     def create_cargo_wagon(self):
-        cargo_wagon = CargoTrainCar()
-        self.wagons.append(cargo_wagon)
-        self.__print_object_created_successfully(cargo_wagon)
+        message = ['Введите объём вагона: ']
+        capacity = self.__data_input(message)
+        try:
+            cargo_wagon = CargoTrainCar(capacity)
+        except ValueError as val:
+            self.__print_unsuccessful(val)
+        else:
+            self.wagons.append(cargo_wagon)
+            self.__print_object_created_successfully(cargo_wagon)
 
     # Принимает сообщение. Выводит пронумерованный список поездов.
     # Запрашивает у пользователя выбор поезда и возвращает его.

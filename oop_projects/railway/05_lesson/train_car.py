@@ -9,7 +9,8 @@ class TrainCar(ModuleCompany):
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, wagon_type, capacity):
         self.__wagon_type = wagon_type
-        self.capacity = int(capacity)
+        self.capacity = capacity
+        self.__is_valid()
         self.occupied = 0
 
     # Развернутое отображение объекта класса Wagon(отображает тип вагона и id) в консоли.
@@ -27,3 +28,18 @@ class TrainCar(ModuleCompany):
     def return_occupied_places(self):
         return self.occupied
 
+    def __validate(self):
+        if self.capacity.isdigit():
+            if int(self.capacity) > 0:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    # Проверка объекта на валидность. В случае не валидности выбросит исключение.
+    def __is_valid(self):
+        if self.__validate():
+            return True
+        else:
+            raise ValueError('Значение может быть только положительное цело число!')

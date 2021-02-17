@@ -27,7 +27,7 @@ class Train(ModuleCompany, InstanceCounter):
         self.__name = number
         self.__is_valid()
         self.__train_type = train_type
-        self.__wagons = list()
+        self.__wagons = []
         self.__current_speed = 0
         self.__route = None
         self.__current_station = None
@@ -143,6 +143,10 @@ class Train(ModuleCompany, InstanceCounter):
     def previous_station(self):
         if self.current_station != self.route.stations[0]:
             return self.route.stations[self.index_current_station() - 1]
+
+    def generator_wagons(self):
+        for wagon in self.wagons:
+            yield wagon
 
     # Проверка формата номера поезда.
     # Допустимый формат: три буквы или цифры в любом порядке,
