@@ -22,12 +22,15 @@ class TrainCar(ModuleCompany):
     def wagon_type(self):
         return self.__wagon_type
 
+    # Возвращает свободное место в вагоне.
     def return_available_seats(self):
         return self.capacity
 
+    # Возвращает занятое место в вагоне.
     def return_occupied_places(self):
         return self.occupied
 
+    # Проверка на положительное число больше 0.
     def __validate(self):
         if self.capacity.isdigit():
             if int(self.capacity) > 0:
