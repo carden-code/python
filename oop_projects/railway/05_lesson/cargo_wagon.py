@@ -6,8 +6,10 @@ class CargoTrainCar(TrainCar):
     def __init__(self, capacity):
         super().__init__('cargo', capacity)
 
+    # Развернутое отображение объекта класса CargoTrainCar в консоли.
     def __repr__(self):
-        return f"(id - {str(id(self))[-3:]})" \
+        return f" Номер: {self.number_wagon}" \
+               f" (id - {str(id(self))[-3:]})" \
                f" Тип: {self.wagon_type}" \
                f" Свободное место: {self.capacity}," \
                f" Занятый объём: {self.occupied}"

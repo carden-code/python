@@ -1,21 +1,20 @@
 from module_company import ModuleCompany
+from instance_counter import InstanceCounter
 
 
 # Класс Wagon (Вагон):
 #  - Имеет тип(passenger/cargo), эти данные указываются при создании экземпляра класса.
 #  - Может возвращать тип вагона.
-class TrainCar(ModuleCompany):
+class TrainCar(ModuleCompany, InstanceCounter):
 
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, wagon_type, capacity):
         self.__wagon_type = wagon_type
         self.capacity = capacity
         self.__is_valid()
+        self.register_instance()
+        self.number_wagon = self.count_instances
         self.occupied = 0
-
-    # Развернутое отображение объекта класса Wagon(отображает тип вагона и id) в консоли.
-    def __repr__(self):
-        return f"Тип: {self.wagon_type}(id - {str(id(self))[-3:]})"
 
     # Возвращает защищенный атрибут __wagon_type (Тип вагона).
     @property
