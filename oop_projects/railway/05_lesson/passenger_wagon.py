@@ -14,6 +14,7 @@ class PassengerTrainCar(TrainCar):
                f" Свободных мест: {self.capacity}," \
                f" Занятых мест: {self.occupied}"
 
+    # Занимает место в вагоне по 1 за раз.
     def occupies_place(self):
         if self.capacity:
             self.capacity -= 1

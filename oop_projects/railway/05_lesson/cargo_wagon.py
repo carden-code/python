@@ -14,6 +14,7 @@ class CargoTrainCar(TrainCar):
                f" Свободное место: {self.capacity}," \
                f" Занятый объём: {self.occupied}"
 
+    # Заполняет вагон.
     def occupies_place(self, value):
         if self.capacity >= value:
             self.capacity -= value
