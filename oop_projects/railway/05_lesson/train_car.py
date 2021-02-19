@@ -45,4 +45,4 @@ class TrainCar(ModuleCompany, InstanceCounter):
         if self.__validate(capacity):
             return True
         else:
-            raise ValueError('Значение может быть только положительное цело число!')
+            raise ValueError('Значение может быть только положительнм целым числом!')
