@@ -10,8 +10,8 @@ class TrainCar(ModuleCompany, InstanceCounter):
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, wagon_type, capacity):
         self.__wagon_type = wagon_type
-        self.capacity = capacity
-        self.__is_valid()
+        self.__is_valid(capacity)
+        self.capacity = int(capacity)
         self.register_instance()
         self.number_wagon = self.count_instances
         self.occupied = 0
@@ -30,9 +30,10 @@ class TrainCar(ModuleCompany, InstanceCounter):
         return self.occupied
 
     # Проверка на положительное число больше 0.
-    def __validate(self):
-        if self.capacity.isdigit():
-            if int(self.capacity) > 0:
+    @staticmethod
+    def __validate(capacity):
+        if capacity.isdigit():
+            if int(capacity) > 0:
                 return True
             else:
                 return False
@@ -40,8 +41,8 @@ class TrainCar(ModuleCompany, InstanceCounter):
             return False
 
     # Проверка объекта на валидность. В случае не валидности выбросит исключение.
-    def __is_valid(self):
-        if self.__validate():
+    def __is_valid(self, capacity):
+        if self.__validate(capacity):
             return True
         else:
             raise ValueError('Значение может быть только положительное цело число!')

@@ -196,6 +196,18 @@ class Railway:
                 if index_station in range(len(route.stations)):
                     return route.stations[index_station]
 
+    # Принимает сообщение. Выводит пронумерованный список вагонов.
+    # Запрашивает у пользователя выбор вагона и возвращает его.
+    def choose_train_car(self, message):
+        if self.wagons:
+            for index, wagon in enumerate(self.wagons, 1):
+                print(f'{index} {wagon}')
+            choice = self.__data_input(message)
+            if choice.isdigit():
+                index_wagon = int(choice) - 1
+                if index_wagon in range(len(self.wagons)):
+                    return self.wagons[index_wagon]
+
     # Прицепляет вагон к поезду. Если есть созданные вагоны.
     # Выбор поезда и если есть вагоны одинакого типа с поездом,
     # добавляет вагон к поезду и удаляет вагон из списка вагонов.
@@ -285,8 +297,8 @@ class Railway:
     # Если у поезда есть маршрут перемещает его на предыдущую станцию в маршруте.
     def move_train_back(self):
         if self.trains:
-            message_train = ['Выберете поезд, который хотите переместить по маршруту назад. Введите номер: ']
-            train = self.choose_train(message_train)
+            message = ['Выберете поезд, который хотите переместить по маршруту назад. Введите номер: ']
+            train = self.choose_train(message)
             if train:
                 if train.route:
                     try:
@@ -297,7 +309,27 @@ class Railway:
 
     # Занять место в вагоне
     def fill_train_car(self):
-        pass
+        if self.wagons:
+            message = ['Выберете вагон, который хотите заполнить. Введите номер: ']
+            wagon = self.choose_train_car(message)
+            if wagon:
+                if wagon.wagon_type == 'passenger':
+                    try:
+                        wagon.occupies_place()
+                        self.__print_successfully()
+                    except ValueError as val:
+                        self.__print_unsuccessful(val)
+                else:
+                    try:
+                        capacity = input(f'Введите количество объёма на который хотите заполнить вагон.'
+                                         f' Доступно {wagon.capacity}: ')
+                        if capacity.isdigit():
+                            wagon.occupies_place(int(capacity))
+                            self.__print_successfully()
+                        else:
+                            raise ValueError('Попробуйте снова. Значение должно быть положительным целым числом.')
+                    except ValueError as val:
+                        self.__print_unsuccessful(val)
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
@@ -334,9 +366,9 @@ class Railway:
         return dict_m
 
     def __dict_actions_methods(self):
-        dict_m = {'1': self.attach_wagon, '2': self.detach_wagon, '3': self.add_intermediate_station,
-                  '4': self.del_intermediate_station, '5': self.assign_route_train,
-                  '6': self.move_train_forward, '7': self.move_train_back}
+        dict_m = {'1': self.attach_wagon, '2': self.detach_wagon, '3': self.fill_train_car,
+                  '4': self.add_intermediate_station, '5': self.del_intermediate_station,
+                  '6': self.assign_route_train, '7': self.move_train_forward, '8': self.move_train_back}
         return dict_m
 
     def __dict_info_methods(self):
@@ -373,11 +405,12 @@ class Railway:
                     self.__BORDERLINE,
                     '1 - Прицепить вагон к поезду.',
                     '2 - Отцепить вагон от поезда.',
-                    '3 - Добавить промежуточную станцию в маршрут.',
-                    '4 - Удалить промежуточную станцию из маршрута.',
-                    '5 - Назначить маршрут поезду.',
-                    '6 - Переместить поезд по маршруту вперед.',
-                    '7 - Переместить поезд по маршруту назад.',
+                    '3 - Заполнить вагон.',
+                    '4 - Добавить промежуточную станцию в маршрут.',
+                    '5 - Удалить промежуточную станцию из маршрута.',
+                    '6 - Назначить маршрут поезду.',
+                    '7 - Переместить поезд по маршруту вперед.',
+                    '8 - Переместить поезд по маршруту назад.',
                     self.__BORDERLINE,
                     '0 - Для возврата в предыдущее меню.']
         for item in messages:
@@ -389,6 +422,7 @@ class Railway:
                     '1 - Посмотреть список вагонов.',
                     '2 - Посмотреть список станций.',
                     '3 - Посмотреть список поездов на станции.',
+                    '4 - Посмотреть список вагонов у поезда.',
                     self.__BORDERLINE,
                     '0 - Для возврата в предыдущее меню.']
         for item in messages:
