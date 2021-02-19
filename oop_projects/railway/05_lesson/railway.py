@@ -311,7 +311,8 @@ class Railway:
             message_station = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
             station = self.choose_station(message_station)
             if station:
-                print(f'Список поездов на станции - {station.trains}')
+                for train in enumerate(station.generator_trains(), 1):
+                    print(*train)
 
     def __dict_create_methods(self):
         dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
