@@ -308,11 +308,21 @@ class Railway:
     # Запрашивает у пользователя выбор станции и выводит все поезда на этой станции.
     def view_list_trains_station(self):
         if self.stations:
-            message_station = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
-            station = self.choose_station(message_station)
+            message = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
+            station = self.choose_station(message)
             if station:
                 for train in enumerate(station.generator_trains(), 1):
                     print(*train)
+
+    # Выводит список вагонов у поезда.
+    # Запрашивает у пользователя выбор поезда и выводит все вагоны у поезда.
+    def view_list_wagons_train(self):
+        if self.trains:
+            message = ['Выберете поезд, для просмотра списка вагонов. Введите номер: ']
+            train = self.choose_train(message)
+            if train:
+                for wagon in enumerate(train.generator_wagons(), 1):
+                    print(*wagon)
 
     def __dict_create_methods(self):
         dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
@@ -326,7 +336,8 @@ class Railway:
         return dict_m
 
     def __dict_info_methods(self):
-        dict_m = {'1': self.list_wagons, '2': self.view_station_list, '3': self.view_list_trains_station}
+        dict_m = {'1': self.list_wagons, '2': self.view_station_list,
+                  '3': self.view_list_trains_station, '4': self. view_list_wagons_train}
         return dict_m
 
     def main_menu_items(self):
