@@ -295,6 +295,10 @@ class Railway:
                     except IndexError as i:
                         self.__print_unsuccessful(i)
 
+    # Занять место в вагоне
+    def fill_train_car(self):
+        pass
+
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
         for index, wagon in enumerate(self.wagons, 1):
