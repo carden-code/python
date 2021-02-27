@@ -241,18 +241,21 @@ class Railway:
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
     def add_intermediate_station(self):
-        if self.routes:
-            message_route = ['Выберете маршрут, в который нужно добавить промежуточную станцию. Введите номер: ']
-            message_station = ['Выберете станцию, которую хотите добавить в маршрут. Введите номер: ']
-            route = self.choose_route(message_route)
-            if route:
-                station = self.choose_station(message_station)
-                if station:
-                    try:
-                        route.add_station(station)
-                        self.__print_successfully()
-                    except ValueError as val:
-                        self.__print_unsuccessful(val)
+        if not self.routes:
+            return
+        message_route = ['Выберете маршрут, в который нужно добавить промежуточную станцию. Введите номер: ']
+        message_station = ['Выберете станцию, которую хотите добавить в маршрут. Введите номер: ']
+        route = self.choose_route(message_route)
+        if not route:
+            return
+        station = self.choose_station(message_station)
+        if not station:
+            return
+        try:
+            route.add_station(station)
+            self.__print_successfully()
+        except ValueError as val:
+            self.__print_unsuccessful(val)
 
     # Удаляет промежуточную станцию из маршрута.
     # Запрашивает выбор маршрута, выводит список промежуточных станций.
