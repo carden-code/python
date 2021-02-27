@@ -144,7 +144,7 @@ class Train(ModuleCompany, InstanceCounter):
         if self.current_station != self.route.stations[0]:
             return self.route.stations[self.index_current_station() - 1]
 
-    def generator_wagons(self):
+    def generate_wagons(self):
         for wagon in self.wagons:
             yield wagon
 

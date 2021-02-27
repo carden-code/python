@@ -45,11 +45,11 @@ class Station(InstanceCounter):
 
     # Принимает аргумен (тип поезда) и возвращает список поездов соответствуещего типа.
     def return_trains_by_type(self, train_type):
-        trains = [train for train in self.generator_trains() if train.train_type == train_type]
+        trains = [train for train in self.generate_trains() if train.train_type == train_type]
         return trains
 
     # Создаёт генератор списка поездов на станции.
-    def generator_trains(self):
+    def generate_trains(self):
         for train in self.trains:
             yield train
 

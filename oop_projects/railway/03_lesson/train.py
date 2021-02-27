@@ -138,3 +138,4 @@ class Train(ModuleCompany, InstanceCounter):
     def previous_station(self):
         if self.current_station != self.route.stations[0]:
             return self.route.stations[self.index_current_station() - 1]
+

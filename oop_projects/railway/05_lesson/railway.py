@@ -347,7 +347,7 @@ class Railway:
             message = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
             station = self.choose_station(message)
             if station:
-                for train in enumerate(station.generator_trains(), 1):
+                for train in enumerate(station.generate_trains(), 1):
                     print(*train)
 
     # Выводит список вагонов у поезда.
@@ -357,7 +357,7 @@ class Railway:
             message = ['Выберете поезд, для просмотра списка вагонов. Введите номер: ']
             train = self.choose_train(message)
             if train:
-                for wagon in enumerate(train.generator_wagons(), 1):
+                for wagon in enumerate(train.generate_wagons(), 1):
                     print(*wagon)
 
     def __dict_create_methods(self):
