@@ -225,14 +225,18 @@ class Railway:
     # Отцепляет вагон от поезда.
     # Выбор поезда и если у этого поезда есть вагоны отцепляет вагон и добавляет его в список вагонов.
     def detach_wagon(self):
-        if self.trains:
-            message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
-            train = self.choose_train(message)
-            if train:
-                if train.wagons:
-                    wagon = train.detach_wagon()
-                    self.wagons.append(wagon)
-                    self.__print_successfully()
+        if not self.trains:
+            return
+
+        message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
+        train = self.choose_train(message)
+
+        if not train or not train.wagons:
+            return
+
+        wagon = train.detach_wagon()
+        self.wagons.append(wagon)
+        self.__print_successfully()
 
     # Добавляет промежуточную станцию в маршрут.
     # Запрашивает выбор маршрута и выбор станции которую нужно добавить и добавляет в маршрут выбранную станцию.
