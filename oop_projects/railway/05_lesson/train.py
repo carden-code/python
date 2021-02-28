@@ -25,7 +25,7 @@ class Train(ModuleCompany, InstanceCounter):
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, number, train_type):
         self.__name = number
-        self.__is_valid()
+        self._is_valid()
         self.__train_type = train_type
         self.__wagons = []
         self.__current_speed = 0
@@ -151,22 +151,20 @@ class Train(ModuleCompany, InstanceCounter):
     # Проверка формата номера поезда.
     # Допустимый формат: три буквы или цифры в любом порядке,
     # необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса.
-    def __validate(self):
-        if len(self.__name) in [5, 6]:
-            if self.__name[:3].isalnum():
-                if self.__name[3:4] == '-' and self.__name[4:].isalnum():
-                    return True
-                elif self.__name[3:].isalnum():
-                    return True
-                return False
+    def _validate(self):
+        if len(self.__name) not in [5, 6]:
             return False
-        return False
+        if not self.__name[:3].isalnum():
+            return False
+        if self.__name[3:4] == '-' and self.__name[4:].isalnum():
+            return True
+        if self.__name[3:].isalnum():
+            return True
 
     # Проверка объекта на валидность. В случае не валидности выбросит исключение.
-    def __is_valid(self):
-        if self.__validate():
+    def _is_valid(self):
+        if self._validate():
             return True
-        else:
-            raise ValueError('Не верный формат номера поезда!')
+        raise ValueError('Не верный формат номера поезда!')
 
 

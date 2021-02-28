@@ -14,7 +14,7 @@ class Station(InstanceCounter):
     #  Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self, name):
         self.__name = name
-        self.__is_valid()
+        self._is_valid()
         self.__trains = []
         self.register_instance()
         Station.stations.append(self)
@@ -58,15 +58,13 @@ class Station(InstanceCounter):
         self.__trains.remove(train)
 
     # Прверка формата названия станции. Больше 2х букв или цифр.
-    def __validate(self):
+    def _validate(self):
         if len(self.__name) >= 3 and self.__name.isalnum():
             return True
-        else:
-            raise ValueError('Название должно быть больше 2х букв или цифр.')
+        raise ValueError('Название должно быть больше 2х букв или цифр.')
 
     # Проверка объекта на валидность. В случае не валидности выбросит исключение.
-    def __is_valid(self):
-        if self.__validate():
+    def _is_valid(self):
+        if self._validate():
             return True
-        else:
-            return False
+        return False
