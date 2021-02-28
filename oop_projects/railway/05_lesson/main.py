@@ -31,6 +31,9 @@ while True:
             railway.perform_actions_objects_menu()
         elif number_menu == '3':
             railway.view_information_objects_menu()
+        else:
+            print('Ошибка, повторите ввод.')
+            break
         menu_item = input()
 
         if menu_item == '0':

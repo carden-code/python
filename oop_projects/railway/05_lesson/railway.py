@@ -260,6 +260,7 @@ class Railway:
         station = self.choose_station(message_station)
         if not station:
             return
+
         try:
             route.add_station(station)
             self.__print_successfully()
@@ -461,18 +462,17 @@ class Railway:
 
     # Принимает значение из меню (menu_item) и вызывает соответствующий метод из словаря dict_m.
     def selected(self, menu_item, number_menu):
-        if not menu_item:
-            return
-        print(f"Ваш выбор: {menu_item}")
-        dict_m = None
-        if number_menu == '1':
-            dict_m = self.__dict_create_methods()
-        elif number_menu == '2':
-            dict_m = self.__dict_actions_methods()
-        elif number_menu == '3':
-            dict_m = self.__dict_info_methods()
+        if menu_item:
+            print(f"Ваш выбор: {menu_item}")
+            dict_m = None
+            if number_menu == '1':
+                dict_m = self.__dict_create_methods()
+            elif number_menu == '2':
+                dict_m = self.__dict_actions_methods()
+            elif number_menu == '3':
+                dict_m = self.__dict_info_methods()
 
-        try:
-            dict_m[menu_item]()
-        except KeyError:
-            print('Ошибка - Повторите ввод')
+            try:
+                dict_m[menu_item]()
+            except KeyError as key:
+                print('Ошибка - Повторите ввод')
