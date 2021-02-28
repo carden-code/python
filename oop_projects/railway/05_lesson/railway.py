@@ -21,10 +21,10 @@ class Railway:
 
     # Иницилизация объекта. Создаёт атрибуты объекта.
     def __init__(self):
-        self.routes = list()
-        self.trains = list()
-        self.wagons = list()
-        self.stations = list()
+        self.routes = []
+        self.trains = []
+        self.wagons = []
+        self.stations = []
 
     # Статический метод принимает сообщение и печатает его,
     # запрашивает значение у пользователя и возвращает его.
@@ -149,91 +149,100 @@ class Railway:
     # Принимает сообщение. Выводит пронумерованный список поездов.
     # Запрашивает у пользователя выбор поезда и возвращает его.
     def choose_train(self, message):
-        if self.trains:
-            for index, train in enumerate(self.trains, 1):
-                print(f'{index} - {train}')
-            choice = self.__data_input(message)
-            if choice.isdigit():
-                index_train = int(choice) - 1
-                if index_train in range(len(self.trains)):
-                    return self.trains[index_train]
+        if not self.trains:
+            return
+        for index, train in enumerate(self.trains, 1):
+            print(f'{index} - {train}')
+        choice = self.__data_input(message)
+        if not choice.isdigit():
+            return
+        index_train = int(choice) - 1
+        if index_train in range(len(self.trains)):
+            return self.trains[index_train]
 
     # Принимает сообщение. Выводит пронумерованный список станцый.
     # Запрашивает у пользователя выбор станции и возвращает ее.
     def choose_station(self, message):
-        if self.stations:
-            for index, station in enumerate(self.stations, 1):
-                print(f'{index} - {station}')
-            choice = self.__data_input(message)
-            if choice.isdigit():
-                index_station = int(choice) - 1
-                if index_station in range(len(self.stations)):
-                    return self.stations[index_station]
+        if not self.stations:
+            return
+        for index, station in enumerate(self.stations, 1):
+            print(f'{index} - {station}')
+        choice = self.__data_input(message)
+        if not choice.isdigit():
+            return
+        index_station = int(choice) - 1
+        if index_station in range(len(self.stations)):
+            return self.stations[index_station]
 
     # Принимает сообщение. Выводит пронумерованный список маршрутов.
     # Запрашивает у пользователя выбор маршрута и возвращает его.
     def choose_route(self, message):
-        if self.routes:
-            for index, route in enumerate(self.routes, 1):
-                print(f'{index} - {route}')
-            choice = self.__data_input(message)
-            if choice.isdigit():
-                index_route = int(choice) - 1
-                if index_route in range(len(self.routes)):
-                    return self.routes[index_route]
+        if not self.routes:
+            return
+        for index, route in enumerate(self.routes, 1):
+            print(f'{index} - {route}')
+        choice = self.__data_input(message)
+        if not choice.isdigit():
+            return
+        index_route = int(choice) - 1
+        if index_route in range(len(self.routes)):
+            return self.routes[index_route]
 
     # Выводит список промежуточных станций.
     # Запрашивает выбор пользователя.
     # И возвращает выбранную станцию.
     def choose_intermediate_station(self, route, message):
         intermediate_stations = route.stations[1:-1]
-        if intermediate_stations:
-            for index, station in enumerate(intermediate_stations, 1):
-                print(f'{index} {station}')
-            choice = self.__data_input(message)
-            if choice.isdigit():
-                index_station = int(choice)
-                if index_station in range(len(route.stations)):
-                    return route.stations[index_station]
+        if not intermediate_stations:
+            return
+        for index, station in enumerate(intermediate_stations, 1):
+            print(f'{index} {station}')
+        choice = self.__data_input(message)
+        if not choice.isdigit():
+            return
+        index_station = int(choice)
+        if index_station in range(len(route.stations)):
+            return route.stations[index_station]
 
     # Принимает сообщение. Выводит пронумерованный список вагонов.
     # Запрашивает у пользователя выбор вагона и возвращает его.
     def choose_train_car(self, message):
-        if self.wagons:
-            for index, wagon in enumerate(self.wagons, 1):
-                print(f'{index} {wagon}')
-            choice = self.__data_input(message)
-            if choice.isdigit():
-                index_wagon = int(choice) - 1
-                if index_wagon in range(len(self.wagons)):
-                    return self.wagons[index_wagon]
+        if not self.wagons:
+            return
+        for index, wagon in enumerate(self.wagons, 1):
+            print(f'{index} {wagon}')
+        choice = self.__data_input(message)
+        if not choice.isdigit():
+            return
+        index_wagon = int(choice) - 1
+        if index_wagon in range(len(self.wagons)):
+            return self.wagons[index_wagon]
 
     # Прицепляет вагон к поезду. Если есть созданные вагоны.
     # Выбор поезда и если есть вагоны одинакого типа с поездом,
     # добавляет вагон к поезду и удаляет вагон из списка вагонов.
     def attach_wagon(self):
-        if self.wagons:
-            message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
-            train = self.choose_train(message)
-            if train:
-                for wagon in self.wagons:
-                    if wagon.wagon_type == train.train_type:
-                        train.attach_wagon(wagon)
-                        self.wagons.remove(wagon)
-                        self.__print_successfully()
+        if not self.wagons:
+            return
+        message = ['Выберете поезд, что бы прицепить вагон. Введите номер: ']
+        train = self.choose_train(message)
+        if not train:
+            return
+        for wagon in self.wagons:
+            if wagon.wagon_type == train.train_type:
+                train.attach_wagon(wagon)
+                self.wagons.remove(wagon)
+                self.__print_successfully()
 
     # Отцепляет вагон от поезда.
     # Выбор поезда и если у этого поезда есть вагоны отцепляет вагон и добавляет его в список вагонов.
     def detach_wagon(self):
         if not self.trains:
             return
-
         message = ['Выберете поезд, что бы отцепить вагон. Введите номер: ']
         train = self.choose_train(message)
-
         if not train or not train.wagons:
             return
-
         wagon = train.detach_wagon()
         self.wagons.append(wagon)
         self.__print_successfully()
@@ -261,82 +270,93 @@ class Railway:
     # Запрашивает выбор маршрута, выводит список промежуточных станций.
     # Запрашивает выбор промежуточной станции для удаления и удаляет ее
     def del_intermediate_station(self):
-        if self.routes:
-            message_route = ['Выберете маршрут из которого нужно удалить промежуточную станцию. Введите номер: ']
-            message_station = ['Выберете станцию, которую хотите удалить из маршрута. Введите номер: ']
-            route = self.choose_route(message_route)
-            if route:
-                station = self.choose_intermediate_station(route, message_station)
-                route.del_station(station)
-                self.__print_successfully()
+        if not self.routes:
+            return
+        message_route = ['Выберете маршрут из которого нужно удалить промежуточную станцию. Введите номер: ']
+        message_station = ['Выберете станцию, которую хотите удалить из маршрута. Введите номер: ']
+        route = self.choose_route(message_route)
+        if not route:
+            return
+        station = self.choose_intermediate_station(route, message_station)
+        route.del_station(station)
+        self.__print_successfully()
 
     # Присваивает маршрут поезду.
     # Запрашивает выбор поезда которому нужно назначить маршрут.
     # Запрашивает выбор маршрута и присваивает выбранный маршрут выбранному поезду.
     def assign_route_train(self):
-        if self.routes and self.trains:
-            message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
-            train = self.choose_train(message_train)
-            if train:
-                message_route = ['Выберете маршрут, который нужно назначить поезду. Введите номер: ']
-                route = self.choose_route(message_route)
-                if route:
-                    train.assign_route(route)
-                    self.__print_successfully()
+        if not self.routes or not self.trains:
+            return
+        message_train = ['Выберете поезд, которому назначить маршрут. Введите номер: ']
+        train = self.choose_train(message_train)
+        if not train:
+            return
+        message_route = ['Выберете маршрут, который нужно назначить поезду. Введите номер: ']
+        route = self.choose_route(message_route)
+        if not route:
+            return
+        train.assign_route(route)
+        self.__print_successfully()
 
     # Перемещает поезд по маршруту вперед.
     # Запрашивает у пользователя выбор поезда.
     # Если у поезда есть маршрут перемещает его на следущую станцию в маршруте.
     def move_train_forward(self):
-        if self.trains:
-            message_train = ['Выберете поезд, который хотите переместить по маршруту вперед. Введите номер: ']
-            train = self.choose_train(message_train)
-            if train:
-                if train.route:
-                    try:
-                        train.forward_movement()
-                        self.__print_successfully()
-                    except IndexError as i:
-                        self.__print_unsuccessful(i)
+        if not self.trains:
+            return
+        message_train = ['Выберете поезд, который хотите переместить по маршруту вперед. Введите номер: ']
+        train = self.choose_train(message_train)
+        if not train or not train.route:
+            return
+
+        try:
+            train.forward_movement()
+            self.__print_successfully()
+        except IndexError as i:
+            self.__print_unsuccessful(i)
 
     # Перемещает поезд по маршруту назад.
     # Запрашивает у пользователя выбор поезда.
     # Если у поезда есть маршрут перемещает его на предыдущую станцию в маршруте.
     def move_train_back(self):
-        if self.trains:
-            message = ['Выберете поезд, который хотите переместить по маршруту назад. Введите номер: ']
-            train = self.choose_train(message)
-            if train:
-                if train.route:
-                    try:
-                        train.moving_backward()
-                        self.__print_successfully()
-                    except IndexError as i:
-                        self.__print_unsuccessful(i)
+        if not self.trains:
+            return
+        message = ['Выберете поезд, который хотите переместить по маршруту назад. Введите номер: ']
+        train = self.choose_train(message)
+        if not train or not train.route:
+            return
+
+        try:
+            train.moving_backward()
+            self.__print_successfully()
+        except IndexError as i:
+            self.__print_unsuccessful(i)
 
     # Занять место в вагоне
     def fill_train_car(self):
-        if self.wagons:
-            message = ['Выберете вагон, который хотите заполнить. Введите номер: ']
-            wagon = self.choose_train_car(message)
-            if wagon:
-                if wagon.wagon_type == 'passenger':
-                    try:
-                        wagon.occupies_place()
-                        self.__print_successfully()
-                    except ValueError as val:
-                        self.__print_unsuccessful(val)
+        if not self.wagons:
+            return
+        message = ['Выберете вагон, который хотите заполнить. Введите номер: ']
+        wagon = self.choose_train_car(message)
+        if not wagon:
+            return
+        if wagon.wagon_type == 'passenger':
+            try:
+                wagon.occupies_place()
+                self.__print_successfully()
+            except ValueError as val:
+                self.__print_unsuccessful(val)
+        else:
+            try:
+                capacity = input(f'Введите количество объёма на который хотите заполнить вагон.'
+                                 f' Доступно {wagon.capacity}: ')
+                if capacity.isdigit():
+                    wagon.occupies_place(int(capacity))
+                    self.__print_successfully()
                 else:
-                    try:
-                        capacity = input(f'Введите количество объёма на который хотите заполнить вагон.'
-                                         f' Доступно {wagon.capacity}: ')
-                        if capacity.isdigit():
-                            wagon.occupies_place(int(capacity))
-                            self.__print_successfully()
-                        else:
-                            raise ValueError('Попробуйте снова. Значение должно быть положительным целым числом.')
-                    except ValueError as val:
-                        self.__print_unsuccessful(val)
+                    raise ValueError('Попробуйте снова. Значение должно быть положительным целым числом.')
+            except ValueError as val:
+                self.__print_unsuccessful(val)
 
     # Выводит пронумерованный список созданных вагонов.
     def list_wagons(self):
