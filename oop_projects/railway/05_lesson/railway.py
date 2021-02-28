@@ -370,22 +370,26 @@ class Railway:
     # Выводит список поездов на станции.
     # Запрашивает у пользователя выбор станции и выводит все поезда на этой станции.
     def view_list_trains_station(self):
-        if self.stations:
-            message = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
-            station = self.choose_station(message)
-            if station:
-                for train in enumerate(station.generate_trains(), 1):
-                    print(*train)
+        if not self.stations:
+            return
+        message = ['Выберете станцию, для просмотра списка поездов. Введите номер: ']
+        station = self.choose_station(message)
+        if not station:
+            return
+        for train in enumerate(station.generate_trains(), 1):
+            print(*train)
 
     # Выводит список вагонов у поезда.
     # Запрашивает у пользователя выбор поезда и выводит все вагоны у поезда.
     def view_list_wagons_train(self):
-        if self.trains:
-            message = ['Выберете поезд, для просмотра списка вагонов. Введите номер: ']
-            train = self.choose_train(message)
-            if train:
-                for wagon in enumerate(train.generate_wagons(), 1):
-                    print(*wagon)
+        if not self.trains:
+            return
+        message = ['Выберете поезд, для просмотра списка вагонов. Введите номер: ']
+        train = self.choose_train(message)
+        if not train:
+            return
+        for wagon in enumerate(train.generate_wagons(), 1):
+            print(*wagon)
 
     def __dict_create_methods(self):
         dict_m = {'1': self.create_station, '2': self.create_passenger_train, '3': self.create_cargo_train,
@@ -457,16 +461,18 @@ class Railway:
 
     # Принимает значение из меню (menu_item) и вызывает соответствующий метод из словаря dict_m.
     def selected(self, menu_item, number_menu):
-        if menu_item:
-            print(f"Ваш выбор: {menu_item}")
-            dict_m = None
-            if number_menu == '1':
-                dict_m = self.__dict_create_methods()
-            elif number_menu == '2':
-                dict_m = self.__dict_actions_methods()
-            elif number_menu == '3':
-                dict_m = self.__dict_info_methods()
-            try:
-                dict_m[menu_item]()
-            except KeyError:
-                print('Ошибка - Повторите ввод')
+        if not menu_item:
+            return
+        print(f"Ваш выбор: {menu_item}")
+        dict_m = None
+        if number_menu == '1':
+            dict_m = self.__dict_create_methods()
+        elif number_menu == '2':
+            dict_m = self.__dict_actions_methods()
+        elif number_menu == '3':
+            dict_m = self.__dict_info_methods()
+
+        try:
+            dict_m[menu_item]()
+        except KeyError:
+            print('Ошибка - Повторите ввод')
