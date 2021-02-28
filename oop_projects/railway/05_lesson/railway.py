@@ -474,5 +474,5 @@ class Railway:
 
             try:
                 dict_m[menu_item]()
-            except KeyError as key:
+            except KeyError:
                 print('Ошибка - Повторите ввод')
