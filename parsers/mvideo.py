@@ -14,7 +14,7 @@ def check_price():
 
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    title = soup.find('h1', class_="fl-h1").get_text().strip()
+    # title = soup.find('h1', class_="fl-h1").get_text().strip()
 
     price = soup.find('div', class_="fl-pdp-price__current").get_text()
     converted_price = int(price[:7].replace("\xa0", ""))
