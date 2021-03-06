@@ -22,8 +22,8 @@ def check_price():
     if converted_price < 149990:
         send_mail()
 
-    print(title)
-    print(converted_price)
+    # print(title)
+    # print(converted_price)
 
 
 def send_mail():
@@ -32,7 +32,7 @@ def send_mail():
     smtp_obj.starttls()
     smtp_obj.ehlo()
 
-    smtp_obj.login('Yourmail@.gmail.com - ', 'password')
+    smtp_obj.login('Yourmail@.gmail.com', 'password')
 
     subject = 'Price fell down!'
     body = 'Check the link https://www.mvideo.ru/products/fotoapparat-sistemnyi-sony-alpha7-iii-ilce-7m3-10014055'
