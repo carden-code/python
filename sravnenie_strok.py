@@ -8,7 +8,7 @@ b = 'Кристиан/ V Сантамарея'.lower()
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-
+# Сравнение отличающихся строк
 def sravnenie(string_1, string_2):
     if '/' in string_1 or '/' in string_2:
         res = similar(string_1, string_2)
