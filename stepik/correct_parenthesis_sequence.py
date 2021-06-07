@@ -4,7 +4,7 @@
 # Note 1. A regular parenthesis sequence is a string consisting only of characters "()",
 # where each open parenthesis has a matching closing parenthesis.
 def is_correct_bracket(text):
-    if text.count('(') != text.count(')') or text[0] == ')' or text[-1] == '(':
+    if text.amount_points('(') != text.amount_points(')') or text[0] == ')' or text[-1] == '(':
         return False
     string = text.replace('()', '')
     while len(string) != 0:
