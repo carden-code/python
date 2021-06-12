@@ -14,16 +14,25 @@
 # Формат выходных данных
 # Программа должна вывести номера зараженных холодильников через пробел.
 # Если таких холодильников нет, ничего выводить не нужно.
-# num = int(input())
-# strings = [' '.join(input()).split() for _ in range(num)]
+num = int(input())
+strings = [' '.join(input()) for _ in range(num)]
 
-string = 'fjhfakn292tjsldko43fdn'
+
 def is_anton(string):
     anton = 'anton'
     new_list = []
+    flag = 0
     for s in string:
-        if s in anton and s not in new_list:
+        if flag == 5:
+            break
+        if s == anton[flag]:
             new_list.append(s)
-    return new_list
+            flag += 1
+    return new_list and ''.join(new_list) == anton
 
-print(is_anton(string))
+
+result = []
+for index, elem in enumerate(strings, 1):
+    if is_anton(elem):
+        result.append(index)
+print(*result)
