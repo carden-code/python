@@ -20,15 +20,15 @@ strings = [' '.join(input()) for _ in range(num)]
 
 def is_anton(string):
     anton = 'anton'
-    new_list = []
-    flag = 0
+    list_symbols_anton = []
+    _index = 0
     for s in string:
-        if flag == 5:
+        if _index == len(anton):
             break
-        if s == anton[flag]:
-            new_list.append(s)
-            flag += 1
-    return new_list and ''.join(new_list) == anton
+        if s == anton[_index]:
+            list_symbols_anton.append(s)
+            _index += 1
+    return list_symbols_anton and ''.join(list_symbols_anton) == anton
 
 
 result = []
