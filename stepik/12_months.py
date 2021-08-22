@@ -1,5 +1,4 @@
 # Solve the natural equation 28n + 30 k + 31 m = 365.
-#
 # Note. Use a nested for loop.
 total = 0
 for n in range(1, 29):
